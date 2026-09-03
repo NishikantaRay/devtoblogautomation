@@ -1,0 +1,597 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Troy Hunt: It&#x27;s a new blog!</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://www.troyhunt.com/assets/css/main.min.css?v=d76bc49d88">
+    <style type="text/css">@font-face {font-family:Vollkorn;font-style:normal;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic-ext/400/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/greek/400/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic/400/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/latin-ext/400/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/vietnamese/400/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic-ext/400/italic.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/greek/400/italic.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic/400/italic.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/latin-ext/400/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/vietnamese/400/italic.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:400;src:url(/cf-fonts/s/vollkorn/5.2.10/latin/400/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/latin-ext/700/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/vietnamese/700/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic/700/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/greek/700/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:normal;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic-ext/700/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic/700/italic.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/latin-ext/700/italic.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/greek/700/italic.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/vietnamese/700/italic.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/cyrillic-ext/700/italic.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Vollkorn;font-style:italic;font-weight:700;src:url(/cf-fonts/s/vollkorn/5.2.10/latin/700/italic.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="icon" href="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/size/w256h256/2021/12/Troy-Hunt-LM-0059_square.png" type="image/png">
+    <link rel="canonical" href="https://www.troyhunt.com/its-a-new-blog/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Troy Hunt">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="It&#x27;s a new blog!">
+    <meta property="og:description" content="It&#x27;s been 434 blog posts over six and a half years. It&#x27;s gone from being excited
+about a hundred visitors in a week to hundreds of thousands on a big day. It&#x27;s
+taken me from a hobby to a career. In so many ways, this blog has">
+    <meta property="og:url" content="https://www.troyhunt.com/its-a-new-blog/">
+    <meta property="og:image" content="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/03/1-1_mini.jpg">
+    <meta property="article:published_time" content="2016-04-19T10:35:28.000Z">
+    <meta property="article:modified_time" content="2017-02-19T17:34:00.000Z">
+    <meta property="article:tag" content="Ghost">
+    <meta property="article:tag" content="Cloudflare">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/troyahunt">
+    <meta property="article:author" content="https://www.facebook.com/troyahunt">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="It&#x27;s a new blog!">
+    <meta name="twitter:description" content="It&#x27;s been 434 blog posts over six and a half years. It&#x27;s gone from being excited
+about a hundred visitors in a week to hundreds of thousands on a big day. It&#x27;s
+taken me from a hobby to a career. In so many ways, this blog has">
+    <meta name="twitter:url" content="https://www.troyhunt.com/its-a-new-blog/">
+    <meta name="twitter:image" content="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/03/1-1_mini.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Troy Hunt">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Ghost, Cloudflare">
+    <meta name="twitter:site" content="@troyhunt">
+    <meta name="twitter:creator" content="@troyhunt">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="794">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Troy Hunt",
+        "url": "https://www.troyhunt.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Troy-Hunt-Profile-Photo.jpg",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Troy Hunt",
+        "image": {
+            "@type": "ImageObject",
+            "url": "//www.gravatar.com/avatar/c5531bfb7d76cdaa370c7baf6053288d?s=250&d=mm&r=x",
+            "width": 250,
+            "height": 250
+        },
+        "url": "https://www.troyhunt.com/author/troyhunt/",
+        "sameAs": [
+            "https://www.troyhunt.com/",
+            "https://www.facebook.com/troyahunt",
+            "https://x.com/troyhunt"
+        ]
+    },
+    "headline": "It's a new blog!",
+    "url": "https://www.troyhunt.com/its-a-new-blog/",
+    "datePublished": "2016-04-19T10:35:28.000Z",
+    "dateModified": "2017-02-19T17:34:00.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/03/1-1_mini.jpg",
+        "width": 1200,
+        "height": 794
+    },
+    "keywords": "Ghost, Cloudflare",
+    "description": "It's been 434 blog posts over six and a half years. It's gone from being excited\nabout a hundred visitors in a week to hundreds of thousands on a big day. It's\ntaken me from a hobby to a career. In so many ways, this blog has defined who I\nam and what I do today but finally, it was time for a change.\n\nYou're now reading an all new blog in an all new design on an all new platform.\nThe content is the only thing that remains and I've literally rebuilt everything\nfrom the ground up over the last few",
+    "mainEntityOfPage": "https://www.troyhunt.com/its-a-new-blog/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 6.52">
+    <link rel="alternate" type="application/rss+xml" title="Troy Hunt" href="https://www.troyhunt.com/rss/">
+    <script defer src="https://cdn.jsdelivr.net/ghost/portal@~2.69/umd/portal.min.js" data-i18n="true" data-ghost="https://www.troyhunt.com/" data-key="5e03cd80efbea6ff26214a466b" data-api="https://troyhunt.ghost.io/ghost/api/content/" data-locale="en" crossorigin="anonymous" type="dbc541992d0b15767429b34f-text/javascript"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/sodo-search.min.js" data-key="5e03cd80efbea6ff26214a466b" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.8/umd/main.css" data-sodo-search="https://troyhunt.ghost.io/" data-locale="en" crossorigin="anonymous" type="dbc541992d0b15767429b34f-text/javascript"></script>
+    
+    <link href="https://www.troyhunt.com/webmentions/receive/" rel="webmention">
+    <script defer src="/public/cards.min.js?v=d76bc49d88" type="dbc541992d0b15767429b34f-text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=d76bc49d88">
+    <script defer src="/public/member-attribution.min.js?v=d76bc49d88" type="dbc541992d0b15767429b34f-text/javascript"></script>
+    <script defer src="/public/ghost-stats.min.js?v=d76bc49d88" data-stringify-payload="false" data-datasource="analytics_events" data-storage="localStorage" data-host="https://www.troyhunt.com/.ghost/analytics/api/v1/page_hit" tb_site_uuid="fb3391dc-723d-4e74-b95a-d641b5feb38e" tb_post_uuid="e5e1be38-9768-4c72-8ea1-96eb9f7e5c18" tb_post_type="post" tb_member_uuid="undefined" tb_member_status="undefined" tb_gift_link="" type="dbc541992d0b15767429b34f-text/javascript"></script><style>:root {--ghost-accent-color: #15171A;}</style>
+    <a rel="me" href="https://infosec.exchange/@troyhunt">Mastodon</a>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B895JNTH7Z" type="dbc541992d0b15767429b34f-text/javascript"></script>
+    <script type="dbc541992d0b15767429b34f-text/javascript">function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-B895JNTH7Z");</script>
+  </head>
+
+  <body class="post-template tag-ghost-tag tag-cloudflare">
+
+    <div id="container">
+        
+
+
+
+<div class="header_block container">
+    <div class="header">
+        <button class="header_navMenu_button i-menu" id="open-button"></button>
+            <div class="header_navMenu_wrap">
+        <nav role="navigation">
+            <ul class="header_navMenu">
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/">Home</a>
+            </li>
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/workshops/">Workshops</a>
+            </li>
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/speaking/">Speaking</a>
+            </li>
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/media/">Media</a>
+            </li>
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/about/">About</a>
+            </li>
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/contact/">Contact</a>
+            </li>
+            <li class="navMenu_list" role="presentation">
+                <a class="navMenu_link" href="https://www.troyhunt.com/sponsorship/">Sponsor</a>
+            </li>
+            </ul>
+        </nav>
+    </div>
+        <div class="header_socialIcons light">
+            <ul>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-x-twitter" href="https://twitter.com/troyhunt"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-facebook-f" href="https://www.facebook.com/troyahunt"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-linkedin-in" href="https://www.linkedin.com/in/troyhunt"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-youtube" href="https://www.youtube.com/user/troyhuntdotcom"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa fa-rss" href="https://feeds.feedburner.com/TroyHunt"></a>
+    </li>
+</ul>        </div>
+    </div>
+</div>
+<div class="sponsor_bar content">
+    <p id="sponsor_message"><strong>Sponsored by:</strong> <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></p>
+</div>
+
+
+<div class="post_header container" style="background-image: url(https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/03/1-1_mini.jpg)">
+  <div class="hover"></div>
+</div>
+
+
+
+<div class="main-wrapper">
+<div class="content-wrapper">
+
+<div class="article-open container no-cover">
+    <div class="hover"></div>
+    <article class="article-open_item wrap">
+        <header class="post_head">
+            <h1>It&#x27;s a new blog!</h1>
+            <div class="post_socialIcons">
+                <ul>
+                    <li class="socialIcons_link">
+                        <a class="fa-brands fa-x-twitter article-open_window" href="https://twitter.com/share?url=https://www.troyhunt.com/its-a-new-blog/&text=Troy%20Hunt%3A%20It's%20a%20new%20blog!"></a>
+                    </li>
+                    <li class="socialIcons_link">
+                        <a class="fa-brands fa-facebook-f article-open_window" href="https://www.facebook.com/sharer/sharer.php?u=https://www.troyhunt.com/its-a-new-blog/"></a>
+                    </li>
+                    <li class="socialIcons_link linkedin">
+                        <a class="fa-brands fa-linkedin-in article-open_window" href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.troyhunt.com/its-a-new-blog/"></a>
+                    </li>
+                    <li class="socialIcons_link reddit article-open_window">
+                        <a class="fa-brands fa-reddit-alien" href="https://reddit.com/submit?url=https://www.troyhunt.com/its-a-new-blog/&title=Troy%20Hunt%3A%20It's%20a%20new%20blog!"></a>
+                    </li>
+                    <li class="socialIcons_link">
+                        <a class="fa fa-envelope" href="mailto:?subject=Troy%20Hunt%3A%20It's%20a%20new%20blog!&amp;body=https://www.troyhunt.com/its-a-new-blog/"></a>
+                    </li>
+                </ul>
+            </div>
+            <span class="post_info">19 April 2016</span>
+        </header>
+    </article>
+</div>
+
+<main class="article-open_content container">
+    <article class="wrap">
+        <section class="article_text post">
+            <!--kg-card-begin: markdown--><p>It's been 434 blog posts over six and a half years. It's gone from being excited about a hundred visitors in a week to hundreds of thousands on a big day. It's taken me from a hobby to a career. In so many ways, this blog has defined who I am and what I do today but finally, it was time for a change.</p>
+<p>You're now reading an all new blog in an all new design on an all new platform. The content is the only thing that remains and I've literally rebuilt everything from the ground up over the last few months. Over that time, I've made many promises to explain how I decided to do it so my first post on the new platform is going to be a very meta-post about how everything you're seeing here has been put together. I'd <em>love</em> to get your feedback too so please do use the comments below; tell me what you love or hate or think I can improve and whilst I may not be able to do everything, I can at least read all feedback and I'm sure a bunch of it will lead to positive improvements.</p>
+<h2 id="ghostghostpro">Ghost, Ghost Pro</h2>
+<p>Last year I had to create a new blog. Not for me, mind you, rather for my wife, Kylie. I wanted something she could self-manage and that was a good, modern day platform. I looked at WordPress options but there were a number of things that just didn't sit well with me on that front. One of them was the sheer scale of security issues they have and before you interject, yes, I know that's usually because of third party add-ons yet the ecosystem still facilitates this. Then there was just the multitude of things that WordPress sites do that she simply didn't need - all she wanted was a blog, not add-ons and forms and other things that were ancillary to the simple objective of just creating a blog.</p>
+<p>You can read more about it in <a href="https://www.troyhunt.com/creating-blog-for-your-non-techie/">Creating a blog for your non-techie significant other; the path to Ghost</a> but as the title suggests, the solution was ultimately to move her to Ghost. And then I got a bit jealous because <a href="https://kyliehunt.com/?ref=troyhunt.com">her site looked so damn good!</a> It doesn't just look good, it's all HTTPS, loads super-fast and is a joy to work with.</p>
+<p>After creating Kylie's blog and writing about the process, I began having a bit of dialogue with <a href="https://twitter.com/JohnONolan?ref=troyhunt.com">John O'Nolan from Ghost</a>, AKA the guy who created Ghost. I was already keen to move this blog for a whole bunch of reasons that will become clear as you read this post, and John offered to help make it happen. It was never going to be a simple task and particularly as an independent these days, I have to think carefully about where I spend my time. The offer of support was enough to tip me over into saying &quot;yes&quot; and now here we are!</p>
+<p>One more thing before I get into the details; this blog is running on <a href="https://ghost.org/pricing/?ref=troyhunt.com">Ghost Pro</a> which is their commercially hosted version of the otherwise free Ghost blogging platform. A lot of people have suggested I should host it myself on Azure or Digital Ocean or similar and I have absolutely zero interest in doing that for a blog. Let me explain.</p>
+<p>Hosting websites is like having kids; they're continually attacked by nasty things, they need ongoing care and as good an idea as they may seem at the time, they end up costing you a heap more than you planned. And no, I don't care that [whatever your favourite is] only costs 3 cents a month because that's not what matters; <em>time</em> is the commodity that's most valuable to me now. It's not just time in terms of hours actually spent, it's needing to be ready to patch any nasties, managing (and testing) backups, installing updates so you can leverage new features and so on and so forth. Let's be overly optimistic about it and say all that only takes 2 hours a month - what's that worth to you? Go on, put a dollar figure on it and consider what you could charge for the time plus what it's worth to simply not have to think about it.</p>
+<p>Alternatively, check out <a href="http://web.archive.org/web/20160329153410/https://ghost.org/ghost-pro-vs-self-hosting/">this one the Ghost folks prepared earlier</a> which I wholeheartedly agree with:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Ghost-Pro-versus-self-hosting.png" alt="Ghost Pro versus self-hosting" loading="lazy"></p>
+<p>You do have to make trade-offs on a managed platform like Ghost Pro. For example, I can't add custom responses headers and implement a <a href="https://www.troyhunt.com/implementing-content-security-policy/">content security policy</a>. On the other hand, I'm not patching it and securing the environment as I would be if I managed it myself which would give me access to headers so I'm effectively trading off one security defence of limited value to a read-only personal blog and substituting it with a far more valuable defence which is letting the Ghost pros manage their platform. Pragmatism, people.</p>
+<p>Ghost Pro starts at $19/m and if this seems like an insurmountably high amount, it might be time to think about whether it's worth doing at all if it's not worth ~60 cents a day. That cost can go up if you've got larger traffic numbers, but I'll talk shortly about how to keep that down with CloudFlare as well. For me, it was never up for discussion, a SaaS offering like Ghost Pro is an absolute no-brainer.</p>
+<p>Right, that's clear, let me move on to the mechanics of how it's all put together.</p>
+<h2 id="cloudflare">CloudFlare</h2>
+<p>There are three things you need to understand about CloudFlare if you're not already familiar with what they do:</p>
+<ul>
+<li>Their service routes your traffic through their global infrastructure</li>
+<li>They give you security bits and performance bit <em>for free</em></li>
+<li>It only takes 5 minutes to setup</li>
+</ul>
+<p><a href="https://www.troyhunt.com/how-to-get-your-ssl-for-free-on-shared/">I wrote about CloudFlare last year</a> and it's a really neat way of simply wrapping services around your existing site. In fact, I was so impressed with CloudFlare that I ended up writing a Pluralsight course on it, <a href="https://app.pluralsight.com/library/courses/cloudflare-security-getting-started/table-of-contents?ref=troyhunt.com">Getting Started with CloudFlare Security</a>. At the time of writing the course just under a year ago, they were putting 5 <em>trillion</em> (yes, with a &quot;t&quot;) requests a month through their infrastructure, a globally distributed collection of edge nodes that sit, well, pretty much everywhere:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/CloudFlares-CDN.png" alt="CloudFlare's CDN" loading="lazy"></p>
+<p>When you have a service like this that sits in between customers and the origin website (the one running on Ghost), you can do all sorts of neat performance and security things. Actually let's get onto that now - security - and I'm <em>really</em> happy with this next bit...</p>
+<h2 id="itsallhttps">It's all HTTPS</h2>
+<p>I've been hammered by people on my lack of HTTPS for some time, even occasionally being called hypocritical for not having it when writing about the importance of it on other sites. Let me take issue with that for a moment: criticising a commercial website accepting credentials in the clear or a payment provider loading credit card forms insecurely is a world apart from a public blog where you only read information being loaded over HTTP. Absolutist views like this are unhealthy; pragmatism about what security defences make sense in what scenarios is <em>really</em> important.</p>
+<p>That said, I <em>really</em> dislike this sort of thing:</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Oh <a href="https://twitter.com/Fly_Norwegian?ref=troyhunt.com">@Fly_Norwegian</a> ... you didn&#39;t just do that?!? /cc <a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a> <a href="https://t.co/1QpsOlUDxX?ref=troyhunt.com">pic.twitter.com/1QpsOlUDxX</a></p>&mdash; David Peter Hansen (@DPHansen) <a href="https://twitter.com/DPHansen/status/686151107656216576?ref=troyhunt.com">January 10, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>I saw it myself last year whilst flying Norwegian and whilst I'm sure this looked great on the marketing slides, it's a profoundly obtrusive and irresponsible thing for them to do. And now they can't because the data is encrypted from your device as it flows out through the network so Norwegian, screw you!</p>
+<p>But increasingly, there are other reasons to go all HTTPS on a blog like this one. One is that <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html?ref=troyhunt.com">Google now use it as a ranking signal</a> or in other words, your searchability gets a bump simply by virtue of serving it securely. It's allegedly a minor bump but in a space where SEO techniques are not just very competitive but often very shady, a bump for doing something positive is a very good thing indeed.</p>
+<p>Another reason is that sooner or later, sites that <em>aren't</em> served over HTTPS are going to be explicitly flagged as insecure. Think about how it works at present; let's take a site like, oh I dunno, Norwegian airlines:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Insecure-Norwegian.png" alt="Insecure Norwegian Airlines site" loading="lazy"></p>
+<p>This site is insecure but the browser doesn't tell you that, rather it just loads it up without any visual warning indicators - it's <em>implicitly</em> insecure. Compare that to what you now see in the address bar of this site - green and padlock, depending on your browser - it's <em>explicitly</em> secure. Scott Helme talks about this in his excellent post about <a href="https://scotthelme.co.uk/still-think-you-dont-need-https/?ref=troyhunt.com">Still think you don't need HTTPS?</a> which is well worth a read if you're on the fence about how important the shift to &quot;secure by default is&quot;.</p>
+<p>You can actually see what this looks like right now: in Chrome, jump on over to <a href="chrome://flags/#mark-non-secure-as">chrome://flags/#mark-non-secure-as</a> and tell it to mark non-secure origins as non-secure:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Non-secure-origins.png" alt="Marking non-secure origins as non-secure" loading="lazy"></p>
+<p>Now you head on over to Norwegian airlines and, well:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Norwegian-flagged-as-insecure.png" alt="Norwegian Air flagged as insecure" loading="lazy"></p>
+<p>Fortunately, the web as a whole is moving in the right direction albeit at a gradual pace. For example, only a couple of weeks ago <a href="https://en.blog.wordpress.com/2016/04/08/https-everywhere-encryption-for-all-wordpress-com-sites/?ref=troyhunt.com">Wordpress announced that all sites on wordpress.com would get HTTPS</a>. It's an incremental process that will take many years to filter out to masses of HTTP sites out there but eventually, insecure sites will be the exception so best start moving away from that early.</p>
+<p>I've also enabled <a href="https://www.troyhunt.com/understanding-http-strict-transport/">HSTS</a> which means that once you do see the site over a secure connection, supporting browsers (which is all the major modern ones now), won't load the content over HTTP. I can't force it on subdomains though because I have the likes of <a href="https://hackyourselffirst.troyhunt.com/?ref=troyhunt.com">hackyourselffirst.troyhunt.com</a> and a couple of others which I want to keep serving content over HTTP. That also means I can't preload (explained in that HSTS link) but again, it's a personal blog, it's not a class of site that warrants the changes required to enable those extra layers of defence. Go and have a good look at the configuration of <a href="https://haveibeenpwned.com/?ref=troyhunt.com">haveibeenpwned.com</a> if you'd like to see a utopian security headers approach.</p>
+<p>One thing to be clear about with HTTPS on this blog is where it begins and ends using CloudFlare's service. What this new blog means is that I've been able to go from zero encryption anywhere to <a href="https://www.ssllabs.com/ssltest/analyze.html?d=troyhunt.com&s=104.28.19.35&latest&ref=troyhunt.com">A+ grade encryption from the browser to CloudFlare</a> (so all the most common attack vectors like rogue wireless providers, dodgy ISPs and modified DNS are all good now) and what they call &quot;full&quot; encryption from CloudFlare to Ghost. This protects against passive eavesdropping on that network segment (i.e. the NSA can't just <em>watch</em> the traffic), but <em>doesn't</em> employ what they call &quot;Full strict&quot; encryption which would also protect against an adversary issuing a fake certificate. To do that, I'd need Ghost Pro to support me loading my own certificate for troyhunt.com into the site there and that's not a feature they presently enable, in fact <a href="http://support.ghost.org/ssl-with-cloudflare/?ref=troyhunt.com">they expressly direct people to do precisely what I've done here with CloudFlare</a>. I'll write more about this another time but for a personal blog, it's more than ample.</p>
+<p>Last thing on HTTPS - before anyone says &quot;Well you really need to preload HSTS and use HPKP to be properly secure&quot; - do a quick reality check. No seriously, <em>it's a freakin' blog</em> and as much as I'd like to think it's important enough for Ahmadinejad to go and own another CA and issue rogue certs so that he can inspect your requests to troyhunt.com, it's not. I spend a lot of my time when teaching security courses these days trying to talk about pragmatism; applying the right security levels to the right assets <em>and knowing when to</em> is both very important and sorely lacking. I'll write more on this lately because some of the absolutist attitudes I've seen recently need a bit of bringing back down to earth.</p>
+<h2 id="tor">Tor</h2>
+<p>This is one thing I didn't want happening:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a> I&#39;d like to know why you chose <a href="https://twitter.com/CloudFlare?ref=troyhunt.com">@CloudFlare</a> because as a regular visitor to your site, you&#39;ve just made my life more painful.</p>&mdash; hXmxhvEM2mtY (@hXmxhvEM2mtY) <a href="https://twitter.com/hXmxhvEM2mtY/status/721629320016334848?ref=troyhunt.com">April 17, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>If you believe their stats, <a href="https://blog.cloudflare.com/the-trouble-with-tor/?ref=troyhunt.com">94% of the traffic from Tor is malicious</a>. If you believe Tor, <a href="https://blog.torproject.org/blog/trouble-cloudflare?ref=troyhunt.com">CloudFlare don't know what they're talking about</a>, or at least they analyse the data in a very selective fashion. Regardless, when you route your traffic through CloudFlare, by default users on Tor will be challenged:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/TorBrowserChallenge.png" alt="Capture when using Tor Browser" loading="lazy"></p>
+<p>This is not a pleasant user experience. I get why they're doing it and regardless of what the figures are, a network designed to anonymise the traffic is going to have a bunch of evil stuff come through it that's <em>probably</em> going to be harder to track than via the clear web. If I was wrapping my own app in CloudFlare and I had serious business going on in it that was unlikely to see <em>legitimate</em> traffic coming from Tor, I'd think differently. But when everything is running on a managed service like Ghost Pro, it's not my problem! (Remember, that's another joy of not hosting your own things - they get to deal with any attacks themselves!)</p>
+<p>Anyway, the point is that I want to make things as frictionless as possible and as such, I've followed <a href="https://support.cloudflare.com/hc/en-us/articles/203306930-Does-CloudFlare-block-Tor-?ref=troyhunt.com">CloudFlare's guidance on whitelisting Tor traffic</a>. Anyone who chooses to browse via Tor will now be able to do so without a challenge. In fact, that was my decision well before even launching the site and it was like that from the very first requests through CloudFlare.</p>
+<h2 id="performance">Performance</h2>
+<p>This pleases me enormously:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a> Just hit the new site for the first time. Pretty damn fast. even rivals the one I built last week. Which is impressive!</p>&mdash; Gerard (@Spitfire2k6) <a href="https://twitter.com/Spitfire2k6/status/721998005885407233?ref=troyhunt.com">April 18, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>And this:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a> new site looks great and is very fast. I&#39;ll forgive most things if your site loads quickly!</p>&mdash; Colm Heaney (@ColmJHeaney) <a href="https://twitter.com/ColmJHeaney/status/722220406191603712?ref=troyhunt.com">April 19, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>This one too:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a> <a href="https://twitter.com/TryGhost?ref=troyhunt.com">@TryGhost</a> <a href="https://twitter.com/CloudFlare?ref=troyhunt.com">@CloudFlare</a> Looks great, good job. It&#39;s lightening fast!</p>&mdash; Kieran Innes (@kieraninnes) <a href="https://twitter.com/kieraninnes/status/721693054260940800?ref=troyhunt.com">April 17, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>And all the other ones :)</p>
+<p>This is one of the things I'm proudest of - it's chalk and cheese compared to the old blog. Before, I had both a legacy of Blogger-bloat and quite frankly, my own busy content with too many widgets and other bits integrated into the page.</p>
+<p>This time, I wanted to go fast. Real fast. Let me show you the quantitative results and I'll start with a page speed test of the old site from Saturday just before I rolled over, here's <a href="http://tools.pingdom.com/fpt/?ref=troyhunt.com#!/dn8ylo/http://www.troyhunt.com">a link to the actual test</a>:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Old-site-pingdom.png" alt="The old site on Pingdom" loading="lazy"></p>
+<p>Now that's still faster than 74% of the sites they've tested so not too bad, but it's also 142 requests at 2.1MB and taking 1.9 seconds. In the grand scheme of websites, it's actually not too bad. But I could do better - <em>much</em> better.</p>
+<p>Different test tools will rate sites differently too so I wanted to mix it up a bit. I quite like the way GTmetrix breaks down the data so I ran it through there too. Here's <a href="https://gtmetrix.com/reports/www.troyhunt.com/DExcuEa7?ref=troyhunt.com">a link to the actual test</a> and the results as follows:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/GTMetrix-test.png" alt="Old site on GTmetrix" loading="lazy"></p>
+<p>This test doesn't load the ads so the requests are way down, but the duration was actually higher at 3.3 seconds. Different tests, different methodologies, the main thing is how the new site compares to the old when using the same tools. Let's give that a go, <a href="http://tools.pingdom.com/fpt/?ref=troyhunt.com#!/dJPNsp/https://www.troyhunt.com">here's a test of the new site</a>.</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/NewSiteOnPingdom-1.png" alt="New site on Pingdom" loading="lazy"></p>
+<p>Let me bask in this for a moment:</p>
+<ul>
+<li>The number of requests are down 87%</li>
+<li>The page size is down 81%</li>
+<li>The load time is down 61%</li>
+<li>It's now faster than 94% of (tested) sites on the web!</li>
+</ul>
+<p>Let's try GTmetrix, <a href="https://gtmetrix.com/reports/www.troyhunt.com/dsWZec2W?ref=troyhunt.com">here's the new one</a>:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/NewGTMetrix-test-2.png" alt="New GTmetrix test" loading="lazy"></p>
+<p>Again, different perf tests will differ in different ways, the main thing is that everything here shows improvement <em>and it's all green!</em> There are always further tweaks that can be made and I do have a few in mind, for example:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a> are you making use of our “cache everything” option via PageRules? Can cache entire static pages — we can serve 95% of requests</p>&mdash; Justin (@xxdesmus) <a href="https://twitter.com/xxdesmus/status/721864380875300864?ref=troyhunt.com">April 18, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>There are issues there related to cache expiry and the very limited number of page rules the free CloudFlare offering gives you, but we're well and truly into the realm of very small improvements now.</p>
+<h2 id="perftweaksgalore">Perf tweaks galore</h2>
+<p>Clearly, I'm really happy with the performance of the site and that's been one of the resounding pieces of feedback since I launched. Let me talk through just some of the things I've done to eke out as much perf as I could.</p>
+<p>All the obvious things such as bundling and minimising CSS and JavaScript are there. As part of my Node.js journey (Ghost is all built on Node), I wrangled up a Gulp file to handle it all and it not only does the usual tricks of combining files and stripping unnecessary characters, it also combines media queries. The Gulp file is <a href="https://github.com/troyhunt/troyhunt.com-ghost-theme/blob/master/gulpfile.js?ref=troyhunt.com">here</a> if you'd like to take a look and I <em>definitely</em> welcome suggestions on that one.</p>
+<p>Obviously sitting behind CloudFlare is an important perf decision as well. It makes the difference between my content sitting only within Ghost Pro's Amsterdam hosting and sitting, well, almost everywhere courtesy of that globally distributed CDN map earlier on. You start to understand just how much difference this makes when you look at the stats in CloudFlare:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/CloudFlare.png" alt="Graph of requests going through CloudFlare" loading="lazy"></p>
+<p>This is over the last 24 hours at the time of writing, a period where I haven't posted anything new and nothing is going nuts as opposed to traffic norms, yet look at the stats. CloudFlare has served 184k requests (about two thirds of them) from nodes close to the user so it's fast for them, but it's also relieved Ghost Pro of those requests plus about 9.5GB of data. That's on a highly-optimised, super-efficient site too so consider what this would mean for a site with heavy pages serving heaps of requests.</p>
+<p>There are endless other little tweaks and optimisations too. For example, all the JavaScript and the IFTTT logo in the footer are inlined in the HTML, they're not external files. They don't need to be because they're so small it's not worth loading up the extra HTTP request for the sake of wearing a few extra bytes on every page load.</p>
+<p>If there's other perf opportunities you see when browsing the site then definitely let me know. I'm sure they're out there!</p>
+<h2 id="designingthesite">Designing the site</h2>
+<p>I built the last site template running on Google's Blogger from scratch. All hand-rolled including the responsive design bits and all the pain that goes with cross platform testing. I actually think things are easier these days if you're targeting modern browsers, but I still didn't want to deal with it myself.</p>
+<p>I began with a false start - I had someone building me a Ghost template and it just didn't work out. It's not that they were bad, it was just one of those things where it was hard for me to articulate what I wanted and for them to turn that into a site. Each time I <em>almost</em> just went &quot;it's good enough&quot; I stopped... and remembered just how critical this site is to the things I do today. It has to represent me and what I do in a way that I'm 100% happy with and compromising just didn't make sense. We iterated many times but ultimately I reached the conclusion that it just wasn't going to work; I had to build it myself.</p>
+<p>To be fair though, I cheated. I looked around <a href="http://marketplace.ghost.org/?ref=troyhunt.com">the Ghost Marketplace</a> and found the template that was the closest to what I actually wanted. Then I started ripping it to pieces. I optimised it fairly significantly, doing things like throwing out SVGs for the social icons and deferring to <a href="https://fortawesome.github.io/Font-Awesome/?ref=troyhunt.com">Font Awesome</a> instead. I discarded fonts I didn't think I needed. I got rid of extraneous markup. In short, I trimmed it down as far as I dared in order to not just get it light, but get it reflecting the image that I wanted to present. That said, there are still artefacts of the original design in there and I'm sure there's wasted bytes floating around, but it's pretty good now :)</p>
+<p>There were plenty of crossroads where I had to make calls on design elements that weren't always easy. For example, I started out with hyperlinks having a bottom border rather than the default underline text decoration. This causes other problems:</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">What&#39;s a reliable way of bottom removing bottom border from images in &lt;a&gt; tags via <a href="https://twitter.com/hashtag/css?src=hash&ref=troyhunt.com">#css</a> without setting a class on &lt;a&gt; or &lt;img&gt;?</p>&mdash; Troy Hunt (@troyhunt) <a href="https://twitter.com/troyhunt/status/719346826411835392?ref=troyhunt.com">April 11, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>The answer is simple - kill the bottom border and lose the aesthetically-more-pleasing space between the letters and the line under them. For a site like this, design fluffiness is not worth performance, usability and maintenance costs. That's a question of degrees, of course, and you're still &quot;paying&quot; the cost of downloading a web font used in the text you're reading plus of course there's some big images in the banners, but it's the presence of these style elements which I felt enabled me the kill fussy little things like the borders instead.</p>
+<p>Lastly, obviously these days everything has to play nice on mobile, that's an absolute given. This site has much better spacing and large fonts which especially makes a difference on pocket devices. But as important as those devices are and contrary to popular industry beliefs, the vast majority of my traffic from the last month is still via desktop browsers:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Mobile-versus-desktop-traffic.png" alt="72% of traffic on desktop browsers" loading="lazy"></p>
+<p>Further to that, 28% of all traffic is on browsers running 1,920 pixels on the horizontal so we're talking about high-res devices. I've tried to make it play nice across everything and I <em>hope</em> I've been able to do that.</p>
+<h2 id="contentmigrationandnewpages">Content migration and new pages</h2>
+<p>Migrating over 434 blog posts isn't a simple thing, although it did end up being easier than expected. In part that's because of awesome support from the folks at Ghost (and I do mean <em>awesome</em> - I can't speak highly enough of the assistance they gave me), and in part because we cheated just a little bit. Normally you'd create posts in Ghost using <a href="https://en.wikipedia.org/wiki/Markdown?ref=troyhunt.com">markdown</a> which is exactly what I've done with this post, the first one on the new platform. However, you can also just write plain old HTML into the posts and that's effectively what we did with the old posts - just moved over the HTML.</p>
+<p>One thing we had to make sure of though was that there was no external content embedded over HTTP otherwise there'd be mixed content warnings when the new blog loaded the parent page over HTTPS. This mostly meant fixing embedded YouTube video references, but I wouldn't be surprised if we've missed a few other content types. Comments section if you find them!</p>
+<p>The paths also changed as Ghost doesn't work to the same convention as the old Blogger platform does plus of course I've now also got HTTPS as the scheme. It meant that a URL like this:</p>
+<pre>http://www.troyhunt.com/2016/04/lenovo-p50-and-my-dislike-of-high-dpi.html</pre>
+<p>Now becomes this:</p>
+<pre>https://www.troyhunt.com/lenovo-p50-and-my-dislike-of-high-dpi/</pre>
+<p>The Ghost folks stood up a bunch of redirects so each &quot;legacy&quot; URL still works just fine. I also uploaded a map into Disqus to migrate comments although disappointingly, that appears to have been only partially successful. Blog posts like the one above don't have any of the old comments appearing on them although I can still see them in the Disqus portal. Other posts came across just fine and I've got a ticket with them now to <em>hopefully</em> get it sorted, although it's been radio silence since I lodged it more than a day ago. Know anyone at Disqus? Give them a nudge for me because frankly, I'm a bit disappointed right now.</p>
+<p>One thing I'm kinda curious about with the 301s is what it'll do to my SEO. Paths have changed and the scheme has changed and indeed this has been one of the hesitations that many people have expressed about moving to HTTPS only - what will it do to their searchability? I honestly don't know, but if I see anything worth sharing once everything has been refreshed in the search engines, I'll write about it.</p>
+<p>Onto new content - you'll see some links across the top of the page (or in the menu if your device is small). These days, what I'm doing with <a href="https://www.troyhunt.com/speaking/">speaking</a> and particularly <a href="https://www.troyhunt.com/workshops/">the workshops I run</a> are really important. I hope I've captured the essence of those here, it's information I only had in pieces before and consolidating it in a cohesive fashion is really important, particularly to my new life as an independent.</p>
+<h2 id="ads">Ads</h2>
+<p>I’ve kept the same three ads as I’ve had for some time now, although I’ve attempted to make them a little less intrusive. Making them more visible more of the time would obviously have been to my financial advantage but every time I looked at this, it just didn’t feel right. Not right aesthetically and not right in terms of prioritising someone else’s message over what readers have actually come to the site to read.</p>
+<p>It’s also completely ad block friendly, in fact I checked it with the major blockers to make sure the page still rendered cleanly and didn’t make a mess of things. Of course I’d <em>like</em> the revenue that comes from the ads, but I’d like people to have a positive experience when they come to my site even more.</p>
+<p>Let me digress on ads for a moment: ad networks - you guys have massively screwed this up. I went to town on bad UX <a href="https://www.troyhunt.com/its-2016-already-how-are-websites-still/">in this very popular post earlier this year</a> and shitty behaviour by ad networks was right up there at the top of the worst offenders. One of the practices that most incensed people was Forbes demanding they disable their ad blocker before viewing their content. That's nuts, right? I mean who would ever do that?! Apparently, about half of you:</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">~1/2 of Forbes visitors disabled their ad blocker voluntarily when asked. <a href="https://t.co/5j5SEvWamJ?ref=troyhunt.com">https://t.co/5j5SEvWamJ</a> <a href="https://twitter.com/RandyWestergren?ref=troyhunt.com">@RandyWestergren</a> <a href="https://t.co/PVbcvqWv1b?ref=troyhunt.com">pic.twitter.com/PVbcvqWv1b</a></p>&mdash; Jeremiah Grossman (@jeremiahg) <a href="https://twitter.com/jeremiahg/status/713102357710577664?ref=troyhunt.com">March 24, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>The ad thing is a mess and it isn't getting better any time soon. I <em>want</em> it to work well and I want people to see my ads because they do actually contribute quite a bit to my efforts when content does well, but above all, I want your experience to be positive.</p>
+<h2 id="iwasgoingtogonaked">I <em>was</em> going to go naked...</h2>
+<p>No, don't get excited, not <em>that</em> naked, rather naked in the sense of troyhunt.com rather than www.troyhunt.com. Of course either would have still worked as both of them always have, it's merely a question of which one becomes the canonical one with the other one simply redirecting to it.</p>
+<p>What originally motivated me to want to do this was nothing more than aesthetics; it's a cleaner look not having the www prefix on the URL when you see it on the page. But what stopped me was entirely practical reasons, starting with this tweet:</p>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">Thanks <a href="https://twitter.com/samnewman?ref=troyhunt.com">@samnewman</a> <a href="https://twitter.com/troyhunt?ref=troyhunt.com">@troyhunt</a>. The benefits of shorter urls are not worth the trouble. I would also stick with www. <a href="https://t.co/YRsghEwzDI?ref=troyhunt.com">https://t.co/YRsghEwzDI</a></p>&mdash; Huilaaja (@Huilaaja) <a href="https://twitter.com/Huilaaja/status/721275259714998272?ref=troyhunt.com">April 16, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" type="dbc541992d0b15767429b34f-text/javascript"></script>
+<p>That site is well worth a read and it has some very valid technical arguments as to why the www prefix makes sense. The more I thought about it, the more I realised that regardless of the technical reasons, my aesthetic arguments didn't really make sense anyway. For example, here's the site loaded on my iPhone now:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/iPhone-address-bar.png" alt="iPhone not showing the www prefix in Safari" loading="lazy"></p>
+<p>And here's how Twitter is showing links:</p>
+<p><img src="https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2016/04/Twitter-Link.png" alt="Twitter not showing the www prefix" loading="lazy"></p>
+<p>These are both www prefixed sites, the respective apps just auto-strip them off when displaying the URL. Now we're in this realm of decreasing aesthetic value, negative technical impact and a change from the existing status quo. So I left it as is and I reckon that's the right decision.</p>
+<h2 id="search">Search</h2>
+<p>Gone. Dead. Cactus.</p>
+<p>The original reason for the decision it is that there's simply no support for search in Ghost. But on further reflection, I began to wonder how much it was actually used and the Google Analytics stats suggested &quot;not much&quot;. The vast bulk of traffic on the old site came from search engines or clicking through on the site, not querying directly <em>on</em> the site. Even if I <em>wanted</em> to add search just because sites &quot;should have it&quot;, a big input box on the page somewhere was honestly not exciting me design wise.</p>
+<p>We'll see how it goes and I'll happily take feedback on this telling me I'm wrong. Of course if I am, I won't be adding in the feature via Ghost and I'll have to look at third party options instead, but let's see how it goes.</p>
+<h2 id="opensource">Open source</h2>
+<p>Not much to say here other than that everything you see here, namely the Ghost template, JS, CSS and Gulp bits are all in a <a href="https://github.com/troyhunt/troyhunt.com-ghost-theme?ref=troyhunt.com">public GitHub repo named troyhunt.com-ghost-theme</a>. If you can fix or enhance or do anything else useful then by all means, submit a contribution and I'll be happy to take it if it helps the site.</p>
+<h2 id="feedback">Feedback</h2>
+<p>I'd love to hear it, particularly anything constructive around stuff that can be refined, clarified, fixed or otherwise made better. Of course I'd love to hear what you like as well; this has been a huge effort a long time coming and whilst I'm obviously very happy with the result, you're the people who have to look at it so your opinions matter enormously!</p>
+<p>And that's it. First post on the new platform with many, many more to come yet.</p>
+<!--kg-card-end: markdown-->
+
+            <section class="article-open_tag">
+                <a class="tag" href="/tag/ghost-tag/">Ghost</a>
+                <a class="tag" href="/tag/cloudflare/">Cloudflare</a>
+            </section>
+        </section>
+        <footer class="post">
+            <section class="article-open_shere">
+                <a class="article-open_shere-twitter article-open_window" href="https://twitter.com/share?text=Troy%20Hunt%3A%20It's%20a%20new%20blog!&amp;url=https://www.troyhunt.com/its-a-new-blog/"><i class="fa-brands fa-x-twitter"></i> Tweet</a>
+                <a class="article-open_shere-facebook article-open_window" href="https://www.facebook.com/sharer/sharer.php?u=https://www.troyhunt.com/its-a-new-blog/"><i class="fa-brands fa-facebook-f"></i> Post</a>
+                <a class="article-open_shere-linkedin article-open_window" href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.troyhunt.com/its-a-new-blog/"><i class="fa-brands fa-linkedin-in"></i> Update</a>
+                <a class="article-open_shere-email" href="mailto:?subject=Troy%20Hunt%3A%20It's%20a%20new%20blog!&amp;body=https://www.troyhunt.com/its-a-new-blog/"><i class="fa fa-envelope"></i> Email</a>
+                <a class="article-open_shere-feed" href="https://feeds.feedburner.com/TroyHunt"><i class="fa fa-rss"></i> RSS</a>
+            </section>
+            <section class="article-open_author">
+                <figure class="article-open_author_image">
+                <div class="img" style="background-image: url(//www.gravatar.com/avatar/c5531bfb7d76cdaa370c7baf6053288d?s&#x3D;250&amp;d&#x3D;mm&amp;r&#x3D;x)"><span class="hidden">Troy Hunt's Picture</span></div>
+                </figure>
+                <div class="article-open_author_bio">
+                    <h5 itemprop="author" itemscope itemtype="http://schema.org/Person">Troy Hunt</h5>
+                    <p>Hi, I&#x27;m Troy Hunt, I write this blog, create courses for Pluralsight and am a Microsoft Regional Director and MVP who travels the world speaking at events and training technology professionals <a href="/about" class="article_link-more fa fa-long-arrow-right"></a></p>
+                </div>
+            </section>
+                <div id="disqus_thread"></div>
+                <div id="disqus_post_url" data="https://www.troyhunt.com/its-a-new-blog/"></div>
+                <div id="disqus_post_identifier" data="ghost-2218"></div>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+        </footer>
+    </article>
+</main>
+
+</div>
+<div class="content-sidebar">
+
+  <div class="widget sidebar-featured">
+    <h4 class="sidebar-featured-header">Troy Hunt</h4>
+    <p>Hi, I&#x27;m Troy Hunt, I write this blog, run &quot;Have I Been Pwned&quot; and am a Microsoft Regional Director and MVP who travels the world speaking at events and training technology professionals <a href="/about" class="article_link-more fa fa-long-arrow-right"></a></p>
+  </div>
+
+  <div class="widget sidebar-featured">
+    <h4 class="sidebar-featured-header">Upcoming Events</h4>
+    <p>I often run <a href="/workshops">private workshops</a> around these, here's upcoming events I'll be at:</p>
+    <div id="events_list"><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>
+  </div>
+
+  <div class="widget sidebar-featured">
+    <h4 class="sidebar-featured-header">Must Read</h4>
+    <ul>
+      <li><a href="/data-breach-disclosure-101-how-to-succeed-after-youve-failed/">Data breach disclosure 101: How to succeed after you've failed</a></li>
+      <li><a href="/data-from-connected-cloudpets-teddy-bears-leaked-and-ransomed-exposing-kids-voice-messages/">Data from connected CloudPets teddy bears leaked and ransomed, exposing kids' voice messages</a></li>
+      <li><a href="/heres-how-i-verify-data-breaches/">Here's how I verify data breaches</a></li>
+      <li><a href="/when-nation-is-hacked-understanding/">When a nation is hacked: Understanding the ginormous Philippines data breach</a></li>
+      <li><a href="/how-i-optimised-my-life-to-make-my-job/">How I optimised my life to make my job redundant</a></li>
+    </ul>
+  </div>
+
+  <div class="widget sidebar-featured">
+    <a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2F" class="pluralsight-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 344.3 74.3" xml:space="preserve"><g><g><g><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="37.3433" y1="2.431" x2="37.3433" y2="73.614"><stop offset="0" style="stop-color:#F05A28" /><stop offset="1" style="stop-color:#EB008B" /></linearGradient><circle fill="url(#SVGID_1_)" cx="37.3" cy="37.3" r="36" /></g><g><path fill="#FFFFFF" d="M31.2,24l23.1,13.3L31.2,50.6L31.2,24 M28.1,18.6l0,37.4l32.4-18.7L28.1,18.6L28.1,18.6z" /><path fill="#FFFFFF" d="M23.7,28l16,9.3l-16,9.3V28 M20.6,22.7v29.2L46,37.3L20.6,22.7L20.6,22.7z" /></g></g><g><g><path fill="#231F20" d="M100.3,37.7c2.6,0,4.2-1.4,4.2-3.5v-0.1c0-2.3-1.6-3.5-4.2-3.5h-4v7H100.3z M92.9,27.5h7.7c4.5,0,7.4,2.6,7.4,6.5v0.1c0,4.4-3.5,6.7-7.8,6.7h-3.9V47h-3.4V27.5z" /></g><polygon fill="#231F20" points="116.5,27.5 119.9,27.5 119.9,43.9 130.2,43.9 130.2,47 116.5,47 " /><g><path fill="#231F20" d="M137.9,38.8V27.5h3.4v11.1c0,3.6,1.9,5.6,4.9,5.6c3,0,4.9-1.8,4.9-5.4V27.5h3.4v11.1c0,5.8-3.3,8.8-8.4,8.8C141.1,47.4,137.9,44.4,137.9,38.8" /><path fill="#231F20" d="M172.7,37.2c2.5,0,4-1.3,4-3.3v-0.1c0-2.1-1.5-3.2-4-3.2h-5v6.6H172.7z M164.3,27.5h8.7c2.5,0,4.4,0.7,5.6,2c1,1.1,1.6,2.5,1.6,4.2v0.1c0,3.2-1.9,5.1-4.7,5.9l5.3,7.4h-4l-4.8-6.8h-4.3V47h-3.4V27.5z" /></g><path fill="#231F20" d="M201.2,39.3l-3.4-7.8l-3.3,7.8H201.2z M196.3,27.4h3.2l8.6,19.6h-3.6l-2-4.7h-9.2l-2,4.7h-3.5L196.3,27.4z" /><polygon fill="#231F20" points="216.4,27.5 219.9,27.5 219.9,43.9 230.1,43.9 230.1,47 216.4,47 " /><g><path fill="#231F20" d="M237.4,44.2l2.1-2.5c1.9,1.6,3.7,2.5,6.2,2.5c2.1,0,3.5-1,3.5-2.5v-0.1c0-1.4-0.8-2.1-4.4-3c-4.2-1-6.5-2.2-6.5-5.8v-0.1c0-3.3,2.8-5.7,6.7-5.7c2.8,0,5.1,0.9,7.1,2.5l-1.8,2.6c-1.8-1.3-3.5-2-5.3-2c-2,0-3.2,1-3.2,2.3v0.1c0,1.5,0.9,2.2,4.6,3.1c4.1,1,6.3,2.5,6.3,5.7v0.1c0,3.7-2.9,5.8-7,5.8C242.5,47.3,239.7,46.3,237.4,44.2" /></g><rect x="261.7" y="27.5" fill="#231F20" width="3.4" height="19.5" /><g><path fill="#231F20" d="M274.5,37.4L274.5,37.4c0-5.5,4.2-10.1,10.1-10.1c3.4,0,5.5,0.9,7.5,2.6l-2.2,2.6c-1.5-1.3-3-2.1-5.5-2.1c-3.6,0-6.3,3.2-6.3,6.9v0.1c0,4,2.6,7,6.6,7c1.8,0,3.5-0.6,4.7-1.5v-3.7h-5v-3h8.3v8.2c-1.9,1.6-4.7,3-8.1,3C278.5,47.4,274.5,43,274.5,37.4" /></g><polygon fill="#231F20" points="302.2,27.5 305.6,27.5 305.6,35.7 315,35.7 315,27.5 318.4,27.5 318.4,47 315,47 315,38.8 305.6,38.8 305.6,47 302.2,47 " /><polygon fill="#231F20" points="327,27.5 327,30.7 333.2,30.7 333.2,47 336.6,47 336.6,30.7 342.8,30.7 342.8,27.5 " /></g></g></svg>
+    </a>
+    <p>Don't have Pluralsight already? <a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fbilling.pluralsight.com%2Findividual%2Fcheckout">How about a 10 day free trial?</a> That'll get you access to thousands of courses amongst which are dozens of my own including:</p>
+    <ol>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fowasp-top10-aspdotnet-application-security-risks">OWASP Top 10 Web Application Security Risks for ASP.NET</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fhttps-every-developer-must-know">What Every Developer Must Know About HTTPS</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fhack-yourself-first">Hack Yourself First: How to go on the Cyber-Offense</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Finformation-security-big-picture">The Information Security Big Picture</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fethical-hacking-social-engineering">Ethical Hacking: Social Engineering</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fmodernizing-websites-microsoft-azure">Modernizing Your Websites with Azure Platform as a Service</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fbrowser-security-headers">Introduction to Browser Security Headers</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fethical-hacking-sql-injection">Ethical Hacking: SQL Injection</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fweb-security-owasp-top10-big-picture">Web Security and the OWASP Top 10: The Big Picture</a></li>
+      <li><a href="https://pluralsight.pxf.io/c/1196446/424552/7490?u=https%3A%2F%2Fwww.pluralsight.com%2Fcourses%2Fethical-hacking-web-applications">Ethical Hacking: Hacking Web Applications</a></li>
+    </ol>
+  </div>
+
+</div>
+</div>
+
+<aside class="article_readNext">
+    <a class="article_readNext_story col-2" href="/disqus-and-the-disappearing-comments-which-still-exist/">
+        <section class="post">
+            <h4>Disqus and the disappearing comments (which still exist)</h4>
+        </section>
+    </a>
+    <a class="article_readNext_story prev col-2" href="/when-nation-is-hacked-understanding/">
+        <section class="post">
+            <h4>When a nation is hacked: Understanding the ginormous Philippines data breach</h4>
+        </section>
+    </a>
+</aside>
+        
+    </div>
+
+    <footer id="footer">
+    
+<div class="footer_block" id="floating_subscribe">
+      <div class="footer">
+        <a href="#subscribe" id="subscribe_link">Subscribe <i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+        <div class="subscribe_close">
+            <a href="#" id="close_floating_subscribe"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="footer_subscription_block container">
+  <div class="footer_subscription wrap">
+    <div class="footer_subscription_formGroup">
+      <a id="subscribe"></a>
+      <h4>Subscribe Now!</h4>
+      <form name="subscribe_form" id="subscribe_form">
+        <div id="new_subscription">
+          <div id="subscribe_unsuccessful"></div>
+          <p>
+            Send new blog posts:<br />
+            <div class="radio_button_group"><input type="radio" name="email_cadence" id="Daily" value="Daily" checked> <label for="Daily">daily</label></div>
+            <div class="radio_button_group"><input type="radio" name="email_cadence" id="Weekly" value="Weekly"> <label for="Weekly">weekly</label></div>
+          </p>
+          <input type="email" value="" name="email_to_subscribe" id="email_to_subscribe" placeholder="email address" required>
+          <input type="submit" value="go!" id="submit_subscribe" />
+        </div>
+        <div id="confirm_captcha"><p>Hey, just quickly confirm you're not a robot:</p></div>
+        <div id="subscribe_loading"><p><i class="fa fa-cog fa-spin" aria-hidden="true"></i> Submitting...</p></div>
+        <div id="subscribe_successful"><p>Got it! Check your email, click the confirmation link I just sent you and we're done.</p></div>
+      </form>
+    </div>
+  </div>
+</div>
+    <div class="footer_informations_block container">
+    <div class="footer_informations wrap">
+        <div class="footer_information-1 col-3">
+            <h6>Copyright 2026, Troy Hunt</h6>
+            <p>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. In other words, share generously but provide attribution.</p>
+        </div>
+        <div class="footer_information-2 col-3">
+            <h6>Disclaimer</h6>
+            <p>Opinions expressed here are my own and may not reflect those of others. Unless I'm quoting someone, they're just my own views.</p>
+        </div>
+        <div class="footer_information-3 col-3">
+            <h6>Published with Ghost</h6>
+            <p>This site runs entirely on <a href="https://ghost.org/">Ghost</a> and is made possible thanks to their kind support. Read more about <a href="https://www.troyhunt.com/its-a-new-blog/">why I chose to use Ghost</a>.</p>
+        </div>
+    </div>
+</div>
+
+    <div class="footer_info_block container">
+        <div class="footer_info wrap">
+            <div class="footer_socialIcons">
+                <ul>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-x-twitter" href="https://twitter.com/troyhunt"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-facebook-f" href="https://www.facebook.com/troyahunt"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-linkedin-in" href="https://www.linkedin.com/in/troyhunt"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa-brands fa-youtube" href="https://www.youtube.com/user/troyhuntdotcom"></a>
+    </li>
+    <li class="socialIcons_link">
+        <a class="fa fa-rss" href="https://feeds.feedburner.com/TroyHunt"></a>
+    </li>
+</ul>            </div>
+        </div>
+    </div>
+    </footer>
+
+    
+
+    <script type="dbc541992d0b15767429b34f-text/javascript">
+      !function(s){"use strict";function e(s){return new RegExp("(^|\\s+)"+s+"(\\s+|$)")}function n(s,e){var n=a(s,e)?c:t;n(s,e)}var a,t,c;"classList"in document.documentElement?(a=function(s,e){return s.classList.contains(e)},t=function(s,e){s.classList.add(e)},c=function(s,e){s.classList.remove(e)}):(a=function(s,n){return e(n).test(s.className)},t=function(s,e){a(s,e)||(s.className=s.className+" "+e)},c=function(s,n){s.className=s.className.replace(e(n)," ")});var i={hasClass:a,addClass:t,removeClass:c,toggleClass:n,has:a,add:t,remove:c,toggle:n};"function"==typeof define&&define.amd?define(i):s.classie=i}(window);
+      !function(){function e(){n()}function n(){i.addEventListener("click",t),d&&d.addEventListener("click",t),c.addEventListener("click",function(e){var n=e.target;a&&n!==i&&t()})}function t(){a?classie.remove(o,"show-menu"):classie.add(o,"show-menu"),a=!a}var o=document.body,c=document.querySelector("#container"),i=document.getElementById("open-button"),d=document.getElementById("close-button"),a=!1;e();for(var r=function(e){e.preventDefault(),window.open(this.href,"social-share","width=580,height=296")},s=document.getElementsByClassName("article-open_window"),u=0;u<s.length;u++)s[u].addEventListener("click",r,!1)}();
+      function showUnsponsored(){document.getElementById("sponsor_message").innerHTML='<a href="/sponsorship"><strong>Sponsored by:</strong> I\'m unsponsored today, click to learn more</a>'}function showNoEvents(){document.getElementById("events_list").innerHTML="<p>No upcoming events were found</p>"}function showSponsor(e){null===e?showUnsponsored():document.getElementById("sponsor_message").innerHTML='<a href="'+e.campaignUrl+'" target="_blank" rel="noopener"><strong>Sponsored by:</strong> '+e.message+' <i class="fa fa-external-link" aria-hidden="true"></i></a>'}function showEvents(e){if(0===e.length)showNoEvents();else{var n="<ol>";e.forEach(function(e){n+=null!==e.url?'<li><a href="'+e.url+'">'+e.name+": "+e.date+", "+e.location+"</a></li>":"<li>"+e.name+": "+e.date+", "+e.location+"</li>"}),n+="</ol>",document.getElementById("events_list").innerHTML=n}}var xmlhttp=new XMLHttpRequest,url="https://bloghelpers.troyhunt.com/api/BlogData";xmlhttp.onreadystatechange=function(){if(4===this.readyState&&200===this.status){var e=JSON.parse(this.responseText);null===e||void 0===e?(showUnsponsored(),showNoEvents()):(showSponsor(e.currentSponsor),showEvents(e.events))}else 4===this.readyState&&200!==this.status&&(showUnsponsored(),showNoEvents())},xmlhttp.open("GET",url,!0),xmlhttp.send();
+      var disqus_config=function(){this.page.url=document.getElementById("disqus_post_url").getAttribute("data"),this.page.identifier=document.getElementById("disqus_post_identifier").getAttribute("data")};!function(){if(null!=document.getElementById("disqus_post_identifier")&&null!=document.getElementById("disqus_post_url")){var t=document,e=t.createElement("script");e.src="//troyhunt.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}}();
+      function reCaptchaSolved(){document.getElementById("subscribe_loading").style.display="block",document.getElementById("confirm_captcha").style.display="none";for(var e,t=encodeURIComponent(document.getElementById("email_to_subscribe").value),n=encodeURIComponent(window.location),c=document.getElementsByName("email_cadence"),s=0,l=c.length;s<l;s++)if(c[s].checked){e=c[s].value;break}var a=document.getElementById("g-recaptcha-response").value,i="Email="+t+"&EmailCadence="+e+"&SourceUrl="+n+"&g-recaptcha-response="+a,o=new XMLHttpRequest;o.open("POST","https://bloghelpers.troyhunt.com/api/subscribe",!0),o.setRequestHeader("Content-type","application/x-www-form-urlencoded"),o.onload=function(){if(document.getElementById("subscribe_loading").style.display="none",200===this.status)document.getElementById("subscribe_successful").style.display="block";else{var e=JSON.parse(this.responseText),t="FakeOrInvalid"===e?"Uh oh, apparently that's a fake or invalid email, sorry!":"Uh oh, that didn't work.Try submitting it again.";document.getElementById("subscribe_unsuccessful").innerHTML="<p>"+t+"</p >",document.getElementById("subscribe_unsuccessful").style.display="block",document.getElementById("new_subscription").style.display="block"}},o.send(i)}function closeFloatingSubscribe(){floating_subscribe.style.display="none",document.cookie="closeFloatingSubscribe=true; expires=1 Jan 2030 00:00:00 UTC; path=/"}document.getElementById("subscribe_form").addEventListener("submit",function(e){if(e.preventDefault(),document.getElementById("new_subscription").style.display="none",window.___grecaptcha_cfg)grecaptcha.reset();else{var t=document.createElement("script");t.setAttribute("src","https://www.google.com/recaptcha/api.js"),document.head.appendChild(t);var n=document.createElement("div");n.setAttribute("class","g-recaptcha"),n.setAttribute("data-sitekey","6LdqYhoUAAAAADieTdwsCSDl0-zIpp6Ga-JzatIZ"),n.setAttribute("data-callback","reCaptchaSolved"),document.getElementById("confirm_captcha").appendChild(n)}document.getElementById("confirm_captcha").style.display="inline-block"});var floating_subscribe=document.getElementById("floating_subscribe");document.cookie.indexOf("closeFloatingSubscribe")===-1&&(floating_subscribe.style.display="block");var closeElement=document.getElementById("close_floating_subscribe");closeElement.addEventListener("click",function(e){closeFloatingSubscribe(),e.preventDefault()},!1);var subscribeElement=document.getElementById("subscribe_link");subscribeElement.addEventListener("click",function(){closeFloatingSubscribe()},!1);
+    </script>
+  <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dbc541992d0b15767429b34f-|49" defer></script></body>
+</html>
