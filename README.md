@@ -212,13 +212,16 @@ Click **Publish to DEV** to expand the publish panel:
 
 #### Publish live, skipping the draft
 
-Tick **Publish live immediately (skip the draft)** and the article goes public
-on DEV straight away — the frontmatter is set to `published: true` before
-sending.
+The toolbar offers both choices up front:
 
-Because that's public and immediate, it takes two clicks: the button becomes
-**Publish live**, and clicking it shows a confirmation before anything is sent.
-Untick the box at any point to go back to creating a draft.
+| Button | Result |
+| --- | --- |
+| **Save as draft** | Creates a draft on DEV (`published: false`) — review and publish there |
+| **Publish live** | Goes public on DEV immediately (`published: true`) |
+
+Because going live is public and immediate, it takes a confirmation click
+before anything is sent. Batch mode has the same option — a **Publish live
+immediately** checkbox that applies to every selected article.
 
 The same choice exists for scheduled posts — see
 [Schedule posts to publish later](#11-schedule-posts-to-publish-later).

@@ -66,11 +66,25 @@ export function PublishPanel({ markdown }: PublishPanelProps) {
     });
   };
 
+  const openWith = (goLive: boolean) => {
+    setLive(goLive);
+    setConfirmLive(false);
+    setStatus({ state: "idle" });
+    setOpen(true);
+  };
+
   if (!open) {
+    // Two buttons rather than one plus a hidden checkbox: the draft/live
+    // choice is the whole decision, so it shouldn't be buried in a panel.
     return (
-      <Button size="sm" variant="outline" onClick={() => setOpen(true)}>
-        Publish to DEV
-      </Button>
+      <div className="flex flex-wrap gap-2">
+        <Button size="sm" variant="outline" onClick={() => openWith(false)}>
+          Save as draft
+        </Button>
+        <Button size="sm" onClick={() => openWith(true)}>
+          Publish live
+        </Button>
+      </div>
     );
   }
 
@@ -78,7 +92,9 @@ export function PublishPanel({ markdown }: PublishPanelProps) {
     <div className="w-full rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold">Publish to DEV</p>
+          <p className="text-sm font-semibold">
+            {live ? "Publish live to DEV" : "Save a draft on DEV"}
+          </p>
           <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>
             ✕
           </Button>

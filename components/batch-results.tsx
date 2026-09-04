@@ -50,6 +50,9 @@ export function BatchResults({ items, onEdit, onReset }: BatchResultsProps) {
     () => new Set(succeeded.map((i) => i.url))
   );
   const [apiKey, setApiKey] = useState("");
+  const [live, setLive] = useState(false);
+  // Publishing many posts live at once is worth a deliberate second click.
+  const [confirmLive, setConfirmLive] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [progress, setProgress] = useState<Record<string, PublishProgress>>({});
 
@@ -82,13 +85,18 @@ export function BatchResults({ items, onEdit, onReset }: BatchResultsProps) {
   };
 
   const publishSelected = async () => {
+    if (live && !confirmLive) {
+      setConfirmLive(true);
+      return;
+    }
+    setConfirmLive(false);
     setPublishing(true);
     setProgress(
       Object.fromEntries(selectedItems.map((i) => [i.url, { state: "pending" as const }]))
     );
     for (const item of selectedItems) {
       setProgress((p) => ({ ...p, [item.url]: { state: "publishing" } }));
-      const outcome = await publishArticle(apiKey.trim(), item.result!.full);
+      const outcome = await publishArticle(apiKey.trim(), item.result!.full, live);
       setProgress((p) => ({
         ...p,
         [item.url]: outcome.ok
@@ -213,7 +221,9 @@ export function BatchResults({ items, onEdit, onReset }: BatchResultsProps) {
       {succeeded.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Publish selected to DEV as drafts</CardTitle>
+            <CardTitle>
+              Publish selected to DEV {live ? "live" : "as drafts"}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -235,22 +245,55 @@ export function BatchResults({ items, onEdit, onReset }: BatchResultsProps) {
               >
                 {publishing
                   ? "Publishing…"
-                  : `Create ${selectedItems.length} draft${selectedItems.length === 1 ? "" : "s"}`}
+                  : confirmLive
+                    ? `Confirm — publish ${selectedItems.length} live`
+                    : live
+                      ? `Publish ${selectedItems.length} live`
+                      : `Create ${selectedItems.length} draft${selectedItems.length === 1 ? "" : "s"}`}
               </Button>
             </div>
+            <label className="mt-3 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+              <input
+                type="checkbox"
+                checked={live}
+                onChange={(e) => {
+                  setLive(e.target.checked);
+                  setConfirmLive(false);
+                }}
+                disabled={publishing}
+                className="h-3.5 w-3.5 accent-indigo-600"
+              />
+              Publish live immediately (skip the draft)
+            </label>
+
+            {confirmLive && (
+              <p className="mt-2 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
+                This publishes {selectedItems.length} article
+                {selectedItems.length === 1 ? "" : "s"} publicly on DEV.to right away. Click{" "}
+                <strong>Confirm</strong> to continue, or untick the box to create drafts.
+              </p>
+            )}
+
             <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
-              Only checked articles are published, one by one, as <strong>drafts</strong> (never
-              live), spaced out to respect DEV&apos;s rate limits. Drafts appear at the top of{" "}
-              <a
-                href="https://dev.to/dashboard"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                your DEV dashboard
-              </a>{" "}
-              — they have no public page until you hit Publish there. Your key is relayed once per
-              article and never stored on the server.
+              Only checked articles are published, one by one, spaced out to respect
+              DEV&apos;s rate limits.{" "}
+              {live ? (
+                <>They go public on DEV immediately.</>
+              ) : (
+                <>
+                  Drafts appear at the top of{" "}
+                  <a
+                    href="https://dev.to/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    your DEV dashboard
+                  </a>{" "}
+                  — they have no public page until you hit Publish there.
+                </>
+              )}{" "}
+              Your key is relayed once per article and never stored on the server.
             </p>
           </CardContent>
         </Card>
