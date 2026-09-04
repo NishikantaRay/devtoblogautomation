@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 
-const DEV_API_URL = "https://dev.to/api/articles";
+/** Overridable so the scheduler can be exercised against a stub in tests. */
+const DEV_API_URL = process.env.DEVTO_API_URL ?? "https://dev.to/api/articles";
 const TIMEOUT_MS = 15_000;
 
 export interface PublishResult {

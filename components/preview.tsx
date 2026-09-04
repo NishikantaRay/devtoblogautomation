@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Toolbar } from "@/components/toolbar";
 import { PublishPanel } from "@/components/publish-panel";
+import { SchedulePanel } from "@/components/schedule-panel";
 import { splitFrontmatter, frontmatterValue } from "@/lib/devto/frontmatter";
 import { loadDraft, saveDraft } from "@/lib/utils/session-store";
 import { PLATFORM_LABELS, type ConversionResult } from "@/lib/types";
@@ -59,13 +60,15 @@ export function Preview({ result, onReset, resetLabel, storageKey }: PreviewProp
               full={text}
               frontmatter={frontmatter}
               isEdited={isEdited}
+              onChange={setText}
               onRevert={() => setText(result.full)}
               onReset={() => onReset(text)}
               resetLabel={resetLabel}
             />
           </div>
-          <div className="mt-3">
+          <div className="mt-3 flex flex-wrap items-start gap-3">
             <PublishPanel markdown={text} />
+            <SchedulePanel markdown={text} />
           </div>
         </CardContent>
       </Card>

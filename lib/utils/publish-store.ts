@@ -60,6 +60,10 @@ export interface PublishResponse {
   url?: string;
   title?: string;
   updated?: boolean;
+  /** True when the article was published live rather than left as a draft. */
+  live?: boolean;
+  /** Frontmatter problems the server repaired before sending. */
+  fixes?: string[];
   message?: string;
 }
 
@@ -67,12 +71,17 @@ export interface PublishResponse {
  * Publishes one article, transparently updating the known DEV draft when one
  * exists and falling back to create if that draft was deleted on DEV.
  */
-export async function publishArticle(apiKey: string, markdown: string): Promise<PublishResponse> {
+export async function publishArticle(
+  apiKey: string,
+  markdown: string,
+  /** true publishes live immediately; false (default) creates a draft. */
+  publishLive = false
+): Promise<PublishResponse> {
   const call = async (articleId?: number) => {
     const response = await fetch("/api/publish", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ apiKey, markdown, articleId }),
+      body: JSON.stringify({ apiKey, markdown, articleId, publishLive }),
     });
     return { status: response.status, data: await response.json() };
   };
@@ -96,6 +105,8 @@ export async function publishArticle(apiKey: string, markdown: string): Promise<
       url: data.result.url,
       title: data.result.title,
       updated: Boolean(data.updated),
+      live: Boolean(data.live),
+      fixes: Array.isArray(data.fixes) ? data.fixes : undefined,
     };
   } catch {
     return { ok: false, message: "Couldn't reach the server. Please try again." };

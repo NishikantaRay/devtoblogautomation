@@ -9,7 +9,16 @@ import { MAX_BATCH_URLS } from "@/lib/types";
 
 const EXAMPLE_URL = "https://dev.to/devteam/for-empowering-community-2k6h";
 
-export type ConvertPayload = { url: string } | { html: string; url?: string };
+export type ConvertPayload =
+  | { url: string }
+  | { html: string; url?: string }
+  | {
+      text: string;
+      title?: string;
+      description?: string;
+      tags?: string[];
+      canonicalUrl?: string;
+    };
 
 interface ConvertFormProps {
   onConvert: (payload: ConvertPayload) => void;
@@ -17,7 +26,10 @@ interface ConvertFormProps {
   loading: boolean;
 }
 
-type Mode = "url" | "html" | "batch";
+type Mode = "url" | "text" | "html" | "batch";
+
+/** Roughly how many words a minute a person reads, for the length hint. */
+const WORDS_PER_MINUTE = 220;
 
 function parseUrlList(text: string): string[] {
   return [...new Set(text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean))];
@@ -29,13 +41,32 @@ export function ConvertForm({ onConvert, onBatch, loading }: ConvertFormProps) {
   const [html, setHtml] = useState("");
   const [sourceUrl, setSourceUrl] = useState("");
   const [batchText, setBatchText] = useState("");
+  const [text, setText] = useState("");
+  const [textTitle, setTextTitle] = useState("");
+  const [textTags, setTextTags] = useState("");
+  const [showTextMeta, setShowTextMeta] = useState(false);
 
   const batchUrls = parseUrlList(batchText);
+  const textWords = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const readMinutes = Math.max(1, Math.round(textWords / WORDS_PER_MINUTE));
 
   const submit = () => {
     if (mode === "url") {
       const trimmed = url.trim();
       if (trimmed) onConvert({ url: trimmed });
+    } else if (mode === "text") {
+      const trimmed = text.trim();
+      if (trimmed) {
+        const tags = textTags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
+        onConvert({
+          text: trimmed,
+          title: textTitle.trim() || undefined,
+          tags: tags.length > 0 ? tags : undefined,
+        });
+      }
     } else if (mode === "html") {
       const trimmed = html.trim();
       if (trimmed) onConvert({ html: trimmed, url: sourceUrl.trim() || undefined });
@@ -47,9 +78,11 @@ export function ConvertForm({ onConvert, onBatch, loading }: ConvertFormProps) {
   const canSubmit =
     mode === "url"
       ? !!url.trim()
-      : mode === "html"
-        ? !!html.trim()
-        : batchUrls.length > 0 && batchUrls.length <= MAX_BATCH_URLS;
+      : mode === "text"
+        ? text.trim().length >= 40
+        : mode === "html"
+          ? !!html.trim()
+          : batchUrls.length > 0 && batchUrls.length <= MAX_BATCH_URLS;
 
   return (
     <div className="flex w-full max-w-2xl flex-col gap-3">
@@ -61,6 +94,7 @@ export function ConvertForm({ onConvert, onBatch, loading }: ConvertFormProps) {
         {(
           [
             ["url", "Blog URL"],
+            ["text", "Write"],
             ["html", "Paste HTML"],
             ["batch", "Batch"],
           ] as const
@@ -71,7 +105,7 @@ export function ConvertForm({ onConvert, onBatch, loading }: ConvertFormProps) {
             aria-selected={mode === value}
             onClick={() => setMode(value)}
             className={cn(
-              "rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
+              "rounded-md px-3 py-1.5 text-sm font-medium transition-colors sm:px-4",
               mode === value
                 ? "bg-indigo-600 text-white shadow-sm"
                 : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
@@ -117,6 +151,70 @@ export function ConvertForm({ onConvert, onBatch, loading }: ConvertFormProps) {
               </Button>
             </div>
           </div>
+        ) : mode === "text" ? (
+          <>
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              disabled={loading}
+              placeholder={
+                "Write or paste your post here — plain text or markdown.\n\n" +
+                "# Start with a heading and it becomes the title.\n\n" +
+                "Everything else is inferred: description, tags, reading time."
+              }
+              aria-label="Article text"
+              autoFocus
+              className={cn(
+                "h-64 w-full resize-y rounded-lg border border-zinc-300 bg-white p-4 text-sm leading-relaxed",
+                "placeholder:text-zinc-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
+                "dark:border-zinc-700 dark:bg-zinc-900 dark:placeholder:text-zinc-500"
+              )}
+            />
+
+            {showTextMeta && (
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Input
+                  placeholder="Title (optional — inferred from your first heading)"
+                  value={textTitle}
+                  onChange={(e) => setTextTitle(e.target.value)}
+                  disabled={loading}
+                  aria-label="Title (optional)"
+                  className="h-10"
+                />
+                <Input
+                  placeholder="Tags, comma separated (optional)"
+                  value={textTags}
+                  onChange={(e) => setTextTags(e.target.value)}
+                  disabled={loading}
+                  aria-label="Tags (optional)"
+                  className="h-10"
+                />
+              </div>
+            )}
+
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3 text-xs text-zinc-400 dark:text-zinc-500">
+                <span>
+                  {textWords.toLocaleString()} {textWords === 1 ? "word" : "words"}
+                  {textWords > 0 && ` · ~${readMinutes} min read`}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowTextMeta((v) => !v)}
+                  className="underline hover:text-zinc-700 dark:hover:text-zinc-300"
+                >
+                  {showTextMeta ? "Hide" : "Set title & tags"}
+                </button>
+              </div>
+              <SubmitButton loading={loading} disabled={!canSubmit} label="Create post" />
+            </div>
+
+            <p className="text-left text-xs text-zinc-400 dark:text-zinc-500">
+              Markdown works as-is — headings, code fences, lists, tables. DEV.to renders{" "}
+              <code>```mermaid</code> diagrams natively. You can edit everything in the
+              preview before publishing.
+            </p>
+          </>
         ) : mode === "batch" ? (
           <>
             <textarea

@@ -1,9 +1,9 @@
 import type { CheerioAPI } from "cheerio";
-import type { Platform } from "@/lib/types";
+import type { ExtractablePlatform } from "@/lib/types";
 import { meta } from "@/lib/utils/html";
 
 /** Determines the source platform from the URL host and HTML fingerprints. */
-export function detectPlatform(url: string, $: CheerioAPI): Platform {
+export function detectPlatform(url: string, $: CheerioAPI): ExtractablePlatform {
   const host = new URL(url).hostname.toLowerCase();
 
   if (host === "medium.com" || host.endsWith(".medium.com")) return "medium";

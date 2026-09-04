@@ -1,4 +1,4 @@
-import type { Platform } from "@/lib/types";
+import type { ExtractablePlatform } from "@/lib/types";
 import type { Extractor } from "./types";
 import { mediumExtractor } from "./medium";
 import { hashnodeExtractor } from "./hashnode";
@@ -9,7 +9,7 @@ import { bloggerExtractor } from "./blogger";
 import { substackExtractor } from "./substack";
 import { genericExtractor } from "./generic";
 
-const EXTRACTORS: Record<Platform, Extractor> = {
+const EXTRACTORS: Record<ExtractablePlatform, Extractor> = {
   medium: mediumExtractor,
   hashnode: hashnodeExtractor,
   devto: devtoExtractor,
@@ -20,7 +20,7 @@ const EXTRACTORS: Record<Platform, Extractor> = {
   generic: genericExtractor,
 };
 
-export function getExtractor(platform: Platform): Extractor {
+export function getExtractor(platform: ExtractablePlatform): Extractor {
   return EXTRACTORS[platform];
 }
 

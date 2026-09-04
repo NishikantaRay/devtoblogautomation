@@ -6,7 +6,15 @@ export type Platform =
   | "ghost"
   | "blogger"
   | "substack"
-  | "generic";
+  | "generic"
+  /** Written or pasted directly by the user, not fetched from anywhere. */
+  | "text";
+
+/**
+ * Platforms identifiable from HTML. Excludes "text", which is written in the
+ * app rather than fetched, so detection never produces it.
+ */
+export type ExtractablePlatform = Exclude<Platform, "text">;
 
 export const PLATFORM_LABELS: Record<Platform, string> = {
   medium: "Medium",
@@ -17,6 +25,7 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   blogger: "Blogger",
   substack: "Substack",
   generic: "Generic blog",
+  text: "Written here",
 };
 
 export interface ArticleMetadata {

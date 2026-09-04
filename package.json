@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "screenshots": "node scripts/screenshots.mjs"
+    "screenshots": "node scripts/screenshots.mjs",
+    "scheduler": "tsx scripts/scheduler.ts",
+    "seed:series": "tsx scripts/seed-series.ts"
   },
   "dependencies": {
     "axios": "^1.18.1",

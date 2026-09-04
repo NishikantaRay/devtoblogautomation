@@ -6,6 +6,7 @@ import {
   generateFrontmatter,
   splitFrontmatter,
   frontmatterValue,
+  normalizeDocument,
 } from "@/lib/devto/frontmatter";
 import { validateUrl, largestFromSrcset } from "@/lib/utils/url";
 import { isRateLimited } from "@/lib/utils/rate-limit";
@@ -43,6 +44,80 @@ describe("postprocessMarkdown", () => {
   it("does not insert a blank line before a closing fence", () => {
     const result = postprocessMarkdown("intro\n```ts\ncode();\n```\noutro");
     expect(result).toBe("intro\n\n```ts\ncode();\n```\n\noutro\n");
+  });
+});
+
+describe("splitFrontmatter — real-world documents", () => {
+  // A document whose frontmatter fails to parse reaches DEV with no title and
+  // is rejected with "Title can't be blank", so these inputs must all work.
+  const expectParsed = (doc: string) => {
+    const { frontmatter, body } = splitFrontmatter(doc);
+    expect(frontmatter).not.toBe("");
+    expect(frontmatterValue(frontmatter, "title")).toBe("My Post");
+    expect(body.trim()).toBe("Body.");
+  };
+
+  it("parses Windows CRLF line endings", () => {
+    expectParsed('---\r\ntitle: "My Post"\r\npublished: false\r\n---\r\n\r\nBody.');
+  });
+
+  it("parses old-Mac CR line endings", () => {
+    expectParsed('---\rtitle: "My Post"\r---\r\rBody.');
+  });
+
+  it("tolerates a UTF-8 BOM", () => {
+    expectParsed('\uFEFF---\ntitle: "My Post"\n---\n\nBody.');
+  });
+
+  it("tolerates a blank line before the opening delimiter", () => {
+    expectParsed('\n---\ntitle: "My Post"\n---\n\nBody.');
+    expectParsed('   \n---\ntitle: "My Post"\n---\n\nBody.');
+  });
+
+  it("still reports no frontmatter when there is none", () => {
+    const { frontmatter, body } = splitFrontmatter("Just a body.");
+    expect(frontmatter).toBe("");
+    expect(body).toBe("Just a body.");
+  });
+
+  it("does not treat a mid-document --- as frontmatter", () => {
+    const { frontmatter } = splitFrontmatter("Body text.\n\n---\n\nMore body.");
+    expect(frontmatter).toBe("");
+  });
+
+  it("accepts smart dashes that editors substitute for ---", () => {
+    // macOS autocorrect and rich-text editors turn --- into an em dash.
+    expectParsed('\u2014\u2014\u2014\ntitle: "My Post"\n\u2014\u2014\u2014\n\nBody.');
+    expectParsed('\u2013\u2013\u2013\ntitle: "My Post"\n\u2013\u2013\u2013\n\nBody.');
+  });
+
+  it("accepts extra dashes and trailing whitespace on delimiters", () => {
+    expectParsed('----\ntitle: "My Post"\n----\n\nBody.');
+    expectParsed('---   \ntitle: "My Post"\n---   \n\nBody.');
+    expectParsed('\t---\ntitle: "My Post"\n---\n\nBody.');
+  });
+
+  it("keeps the body when there is no closing delimiter", () => {
+    // Better to publish an untitled article than to silently eat the body.
+    const { frontmatter, body } = splitFrontmatter('---\ntitle: "T"\n\nBody text.');
+    expect(frontmatter).toBe("");
+    expect(body).toContain("Body text.");
+  });
+});
+
+describe("normalizeDocument", () => {
+  it("rewrites smart delimiters and CRLF into what DEV expects", () => {
+    const messy = '\u2014\u2014\u2014\r\ntitle: "My Post"\r\n\u2014\u2014\u2014\r\n\r\nBody.';
+    const out = normalizeDocument(messy);
+    expect(out.startsWith("---\n")).toBe(true);
+    expect(out).toContain('title: "My Post"');
+    expect(out).not.toContain("\r");
+    expect(out).not.toContain("\u2014");
+    expect(out.trimEnd().endsWith("Body.")).toBe(true);
+  });
+
+  it("leaves a document without frontmatter alone", () => {
+    expect(normalizeDocument("Just a body.")).toBe("Just a body.");
   });
 });
 

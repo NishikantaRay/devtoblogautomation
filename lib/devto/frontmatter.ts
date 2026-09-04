@@ -11,7 +11,7 @@ function devtoTags(tags: string[]): string[] {
   return normalized;
 }
 
-function yamlString(value: string): string {
+export function yamlString(value: string): string {
   // Quote and escape for safe single-line YAML.
   return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, " ")}"`;
 }
@@ -23,14 +23,48 @@ export interface SplitDocument {
   body: string;
 }
 
-/** Splits an article document into its frontmatter block and markdown body. */
+/**
+ * A frontmatter delimiter line: three or more dashes, alone on the line.
+ *
+ * Accepts the typographic dashes (– —) that editors and phone keyboards
+ * substitute for `---`, plus surrounding whitespace, because a delimiter that
+ * looks right to the user but doesn't match leaves DEV with no title.
+ */
+const DELIMITER = /^[ \t]*[-\u2010-\u2015\u2212]{3,}[ \t]*$/;
+
+/**
+ * Splits an article document into its frontmatter block and markdown body.
+ *
+ * Deliberately forgiving about how the block is written: real documents
+ * arrive with Windows line endings, a UTF-8 BOM, a stray leading blank line,
+ * smart dashes, and trailing spaces on the delimiters. Any of those used to
+ * make the block invisible, and an article with no visible frontmatter is
+ * rejected by DEV with "Title can't be blank".
+ */
 export function splitFrontmatter(text: string): SplitDocument {
-  const match = text.match(/^---\n[\s\S]*?\n---(?:\n|$)/);
-  if (!match) return { frontmatter: "", body: text };
-  return {
-    frontmatter: match[0].trimEnd(),
-    body: text.slice(match[0].length).replace(/^\n+/, ""),
-  };
+  const normalized = text
+    .replace(/^\uFEFF/, "")
+    .replace(/\r\n?/g, "\n")
+    // Non-breaking and other exotic spaces, which look identical to a space.
+    .replace(/[\u00A0\u2000-\u200B]/g, " ")
+    .replace(/^\s*\n/, "");
+
+  const lines = normalized.split("\n");
+  if (lines.length === 0 || !DELIMITER.test(lines[0])) {
+    return { frontmatter: "", body: normalized };
+  }
+
+  // Find the closing delimiter. Without one there is no frontmatter block —
+  // treating the rest of the document as frontmatter would lose the body.
+  const close = lines.findIndex((line, i) => i > 0 && DELIMITER.test(line));
+  if (close === -1) return { frontmatter: "", body: normalized };
+
+  const frontmatter = ["---", ...lines.slice(1, close), "---"].join("\n");
+  const body = lines
+    .slice(close + 1)
+    .join("\n")
+    .replace(/^\n+/, "");
+  return { frontmatter, body };
 }
 
 /** Reads a scalar value (e.g. title, cover_image) out of a frontmatter block. */
@@ -65,3 +99,31 @@ export function generateFrontmatter(metadata: ArticleMetadata): string {
   lines.push("---");
   return lines.join("\n");
 }
+
+/**
+ * Returns the document with its frontmatter delimiters and line endings
+ * normalized, ready to send to DEV. Returns the input unchanged when there is
+ * no frontmatter to normalize.
+ */
+export function normalizeDocument(text: string): string {
+  const { frontmatter, body } = splitFrontmatter(text);
+  if (!frontmatter) return text;
+  return `${frontmatter}\n\n${body}`;
+}
+
+/**
+ * Rewrites the frontmatter's `published` flag. DEV reads this field to decide
+ * between a draft and a live article, so this is what makes a scheduled post
+ * actually go live at its due time rather than sitting in drafts.
+ */
+export function setPublishedFlag(document: string, published: boolean): string {
+  const { frontmatter, body } = splitFrontmatter(document);
+  if (!frontmatter) return document;
+  const value = `published: ${published}`;
+  const updated = /^published:\s*.*$/m.test(frontmatter)
+    ? frontmatter.replace(/^published:\s*.*$/m, value)
+    : // No published key at all — insert just after the opening delimiter.
+      frontmatter.replace(/^---\n/, `---\n${value}\n`);
+  return `${updated}\n\n${body}`;
+}
+

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NavLinks } from "@/components/nav-links";
 import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
 
@@ -38,9 +39,12 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <header className="border-b border-zinc-200 dark:border-zinc-800">
           <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
-            <Link href="/" className="text-sm font-bold tracking-tight">
-              Blog<span className="text-indigo-600 dark:text-indigo-400">2</span>DEV
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link href="/" className="text-sm font-bold tracking-tight">
+                Blog<span className="text-indigo-600 dark:text-indigo-400">2</span>DEV
+              </Link>
+              <NavLinks />
+            </div>
             <ThemeToggle />
           </div>
         </header>

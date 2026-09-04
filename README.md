@@ -15,13 +15,17 @@ Everything is **deterministic**: HTML parsing (Cheerio), Markdown conversion (Tu
 - [Quick start](#quick-start)
 - [Features & how to use them](#features--how-to-use-them)
   - [1. Convert a single blog URL](#1-convert-a-single-blog-url)
-  - [2. Edit the output live](#2-edit-the-output-live)
-  - [3. Copy & download](#3-copy--download)
-  - [4. Publish to DEV.to](#4-publish-to-devto)
-  - [5. Paste HTML (for sites that block fetching)](#5-paste-html-for-sites-that-block-fetching)
-  - [6. Batch mode — up to 10 posts at once](#6-batch-mode--up-to-10-posts-at-once)
-  - [7. Dark / light mode](#7-dark--light-mode)
-  - [8. Refresh-safe session](#8-refresh-safe-session)
+  - [2. Write a post from scratch](#2-write-a-post-from-scratch)
+  - [3. Edit the output live](#3-edit-the-output-live)
+  - [4. Fix it for DEV (one button)](#4-fix-it-for-dev-one-button)
+  - [5. Copy & download](#5-copy--download)
+  - [6. Publish to DEV.to](#6-publish-to-devto)
+  - [7. Paste HTML (for sites that block fetching)](#7-paste-html-for-sites-that-block-fetching)
+  - [8. Batch mode — up to 10 posts at once](#8-batch-mode--up-to-10-posts-at-once)
+  - [9. Dark / light mode](#9-dark--light-mode)
+  - [10. Refresh-safe session](#10-refresh-safe-session)
+  - [11. Schedule posts to publish later](#11-schedule-posts-to-publish-later)
+  - [12. Built-in blog series](#12-built-in-blog-series)
 - [How the conversion pipeline works](#how-the-conversion-pipeline-works)
 - [API reference](#api-reference)
 - [Project structure](#project-structure)
@@ -33,7 +37,8 @@ Everything is **deterministic**: HTML parsing (Cheerio), Markdown conversion (Tu
 
 ## What it does
 
-1. You paste a blog URL (or raw HTML, or a list of up to 10 URLs).
+1. You paste a blog URL (or raw HTML, or a list of up to 10 URLs) — **or write
+   the post yourself** in the app.
 2. Blog2DEV fetches the page, detects the platform, extracts the article, strips all the chrome (nav, ads, share buttons, newsletter forms, comments…), and converts it to clean GitHub-flavored Markdown.
 3. It generates DEV.to frontmatter (title, tags, canonical URL, cover image) and shows a **live split preview**.
 4. You edit if needed, then **copy**, **download** (`article.md` / `.zip`), or **publish to DEV.to as a draft** — with one click.
@@ -85,7 +90,55 @@ The result view opens with a metadata bar (platform badge, title, author, date, 
 
 **What you get:** headings, bold/italic, blockquotes, ordered & unordered lists, links, tables, fenced code blocks (with language detection), inline code, images (with alt text), and horizontal rules — all cleaned and normalized.
 
-### 2. Edit the output live
+### 2. Write a post from scratch
+
+You don't need a source URL. On the **Write** tab, type or paste plain text or
+markdown and Blog2DEV turns it into a DEV.to-ready article.
+
+Everything DEV needs is inferred from what you wrote:
+
+| Field | How it's determined |
+| --- | --- |
+| **Title** | A leading `# heading`, else a short unpunctuated first line. Removed from the body so it isn't duplicated — DEV renders the frontmatter title as the page H1. |
+| **Description** | The first real sentence of prose, skipping headings, lists and code. Trimmed to DEV's 155-character limit. |
+| **Tags** | Up to 4, weighted by where words appear — code fence languages and title words rank highest, body prose lowest. Filler ("getting started", "guide") and measurements ("2gb") are filtered out. |
+| **Heading levels** | Any `#` left in the body is shifted down (`#` → `##`, `##` → `###`, …) so the frontmatter title is the only H1. DEV's editor warns about competing H1s; this avoids the warning. `#` comments inside code fences are untouched. |
+
+Type this:
+
+````markdown
+# Why I Switched to DuckDB
+
+I had a 2GB CSV and a question about it. Postgres felt like too much
+ceremony for one query.
+
+```sql
+SELECT country, count(*) FROM 'data.csv' GROUP BY ALL;
+```
+````
+
+...and get this frontmatter:
+
+```yaml
+---
+title: "Why I Switched to DuckDB"
+published: false
+description: "I had a 2GB CSV and a question about it."
+tags: sql, duckdb
+---
+```
+
+Want to set them yourself? **Set title & tags** reveals optional fields that
+override anything inferred. Pasting text that already has frontmatter reuses
+it rather than treating it as body content.
+
+Markdown passes through as-is — headings, code fences, lists, tables — and
+DEV renders ```` ```mermaid ```` diagrams natively. From there it behaves like
+any converted post: edit it live, download it, publish it, or schedule it.
+
+---
+
+### 3. Edit the output live
 
 The left pane (**"Markdown — editable"**) is a full editor. As you type:
 
@@ -97,7 +150,34 @@ Everything you do here flows into copy, download, and publish — so you can fix
 
 ![Preview and editor — dark mode](docs/screenshots/preview-editor-dark.png)
 
-### 3. Copy & download
+### 4. Fix it for DEV (one button)
+
+DEV.to rejects articles whose frontmatter it can't parse — usually with
+*"Title can't be blank"* or *"found unexpected end of stream while scanning a
+quoted scalar"*. Both mean the YAML broke, most often from a hand edit.
+
+The toolbar shows **Fix N issues** whenever something would be rejected, and
+**✓ Valid for DEV** when nothing would. One click repairs:
+
+| Problem | Repair |
+| --- | --- |
+| Unterminated quote (`title: "My Post`) | Closes it |
+| Inner or smart quotes (`"`, `"`) | Escapes / straightens them |
+| Missing title | Takes it from the first heading, else `Untitled` |
+| `published: "true"` | Emits a bare boolean |
+| More than 4 tags, or `Machine Learning` | Caps at 4, lowercases, strips punctuation |
+| Description over 155 chars | Trims it |
+| Body `#` headings | Demotes them (`#` → `##`) so only the title is an H1 |
+
+It repairs **syntax only** — the article's words are never touched, and running
+it twice changes nothing further. Unrecognized frontmatter keys are preserved.
+
+The same repair runs automatically inside **Publish to DEV** and the scheduler,
+so a queued post can't fail unattended at 9am for a stray quote.
+
+---
+
+### 5. Copy & download
 
 From the toolbar:
 
@@ -120,7 +200,7 @@ cover_image: https://original-site.com/cover.png
 
 `published: false` means anything you publish lands as a **draft**, never a live post. Tags are normalized to DEV rules (max 4, lowercase, alphanumeric).
 
-### 4. Publish to DEV.to
+### 6. Publish to DEV.to
 
 Click **Publish to DEV** to expand the publish panel:
 
@@ -130,13 +210,26 @@ Click **Publish to DEV** to expand the publish panel:
 2. Paste it in and click **Create draft** (optionally tick "Remember this key on this device").
 3. The article is created on DEV.to **as a draft**, and you get a link to **your DEV dashboard** where the draft is waiting.
 
+#### Publish live, skipping the draft
+
+Tick **Publish live immediately (skip the draft)** and the article goes public
+on DEV straight away — the frontmatter is set to `published: true` before
+sending.
+
+Because that's public and immediate, it takes two clicks: the button becomes
+**Publish live**, and clicking it shows a confirmation before anything is sent.
+Untick the box at any point to go back to creating a draft.
+
+The same choice exists for scheduled posts — see
+[Schedule posts to publish later](#11-schedule-posts-to-publish-later).
+
 > **Why the dashboard link?** DEV.to drafts have no public page until you hit Publish there — their provisional URL (`…-temp-slug-######`) 404s for anyone who isn't the signed-in author. So Blog2DEV sends you to your dashboard, where the draft always appears at the top.
 
 **Re-publishing updates, it doesn't duplicate.** After a successful publish, Blog2DEV remembers the DEV article ID in your browser (keyed by canonical URL). Publishing the same post again **updates** that existing draft instead of creating a copy. If you deleted the draft on DEV, it detects that and cleanly creates a fresh one.
 
 **Your key is never stored server-side** — it's relayed to DEV once per request and never logged.
 
-### 5. Paste HTML (for sites that block fetching)
+### 7. Paste HTML (for sites that block fetching)
 
 Some sites (notably **Medium**, and paywalled **Substack** posts) block automated fetching. Use the **Paste HTML** tab instead:
 
@@ -149,7 +242,7 @@ Some sites (notably **Medium**, and paywalled **Substack** posts) block automate
 
 The full pipeline runs on the pasted HTML exactly as it would on a fetched page.
 
-### 6. Batch mode — up to 10 posts at once
+### 8. Batch mode — up to 10 posts at once
 
 The **Batch** tab converts many URLs in one go — paste up to **10 URLs, one per line**:
 
@@ -171,15 +264,121 @@ Then, for the **selected** articles:
 - **Download N (.zip)** — bundles the selected articles as individual `.md` files (named by slugified title, with collision handling).
 - **Create N drafts** — publishes the selected articles to DEV.to sequentially (spaced out to respect DEV's rate limits), with per-row progress and dashboard links. Same safety rules as single publish: always drafts, key never stored.
 
-### 7. Dark / light mode
+### 9. Dark / light mode
 
 Toggle with the ☀️ / 🌙 button in the header. It follows your system preference by default, remembers your choice, and applies before first paint (no flash). Every view is fully themed:
 
 ![Landing page — dark mode](docs/screenshots/landing-dark.png)
 
-### 8. Refresh-safe session
+### 10. Refresh-safe session
 
 The current view — single result, batch results, which item you're editing, and any in-progress edits — is persisted to `sessionStorage`. **Refreshing the page keeps you exactly where you were** instead of dropping back to the landing page. (Scoped to the browser tab; cleared when you choose "Convert another" or close the tab.)
+
+---
+
+### 11. Schedule posts to publish later
+
+Instead of publishing right away, click **Schedule** to queue an article for a
+future date and time.
+
+1. Pick a date/time (shown in **your local timezone**, stored internally as UTC).
+2. Tick **Publish live at that time** to have it go live automatically — leave it
+   unticked and it lands on DEV as a draft at that moment instead.
+3. Click **Schedule**. The article is saved to `.data/schedule.json` on this machine.
+
+Manage the queue at **[/schedule](http://localhost:3000/schedule)** — cancel a
+pending post, re-queue a failed one, or delete it entirely.
+
+#### Running the scheduler
+
+Queued posts are published by a worker process. **Nothing publishes unless it's
+running.**
+
+```bash
+cp .env.example .env.local     # then add your DEVTO_API_KEY
+npm run scheduler              # polls every 60s until you stop it
+```
+
+Other ways to run it:
+
+```bash
+npm run scheduler -- --once            # single pass, then exit (good for cron)
+npm run scheduler -- --interval=300    # poll every 5 minutes instead
+```
+
+To drive it from system cron rather than leaving a process up:
+
+```
+*/5 * * * * cd /path/to/project && npm run scheduler -- --once >> scheduler.log 2>&1
+```
+
+**How it behaves**
+
+| Situation | What happens |
+| --- | --- |
+| Post comes due | Worker flips `published:` in the frontmatter per your choice, then sends it to DEV |
+| Worker was off at the due time | It publishes on the next run — overdue posts are never skipped |
+| DEV is unreachable | Retries on later passes, up to 3 attempts, then marks the post `failed` |
+| Bad API key / rejected content | Marked `failed` immediately — retrying wouldn't help |
+| Post already published | Never re-sent; each post stores its DEV article id, so a retry **updates** rather than duplicating |
+| Worker crashes mid-publish | The post is un-stuck after 5 minutes and picked up again |
+
+**Your DEV key lives only in `.env.local`** — it is never written into the
+schedule file alongside your posts.
+
+> **Single machine, single process.** The queue is a JSON file guarded by an
+> in-process write lock, so run **one** scheduler at a time. For multi-instance
+> or serverless deployment, move the store to SQLite or a database first.
+
+---
+
+### 12. Built-in blog series
+
+Blog2DEV can seed a whole **series of long-form posts** into the queue as
+drafts, then walk you through them one per day.
+
+> **Series content is gitignored.** The posts live in `lib/series/<key>/`,
+> which is listed in `.gitignore` — they're local content, not part of the
+> repo. The app builds and runs fine without them; the seeder just reports
+> that none are available. See [docs/series.md](docs/series.md) for the
+> format and how to add your own.
+
+Two series were written for this project:
+
+| Series | Key | Posts | About |
+| --- | --- | ---: | --- |
+| **InsightTrack internals** | `insighttrack` | 20 | Architecture deep-dive of the [InsightTrack](https://github.com/NishikantaRay/InsightTrack) analytics platform |
+| **DuckDB: basics to advanced** | `duckdb` | 10 | First query through production use |
+
+```bash
+npm run seed:series -- --list               # what's available locally
+npm run seed:series                         # seed every series, back to back
+npm run seed:series -- --series=duckdb      # just one
+npm run seed:series -- --time=14:30         # a different time of day
+npm run seed:series -- --start=2026-09-10
+npm run seed:series -- --dry-run            # preview, write nothing
+npm run seed:series -- --replace            # clear and reseed
+```
+
+Posts are scheduled one per day; when seeding multiple series they run
+back-to-back so two posts never land on the same slot.
+
+#### The review gate
+
+Everything seeded lands with status **`draft`**, and **the scheduler never
+publishes a draft** — no matter how overdue it is. A post only becomes eligible
+once you approve it:
+
+```
+draft ──approve──> pending ──scheduler──> published
+  ▲                   │
+  └────unapprove──────┘
+```
+
+Review at **[/review](http://localhost:3000/review)**: read the rendered post,
+edit the markdown, change the publish time, toggle live-vs-draft, then
+**Approve & schedule**. Filter by series and by status; the header badge counts
+what's still waiting on you.
 
 ---
 
@@ -224,6 +423,16 @@ All endpoints are `POST`, JSON in / JSON out, zod-validated, and rate-limited pe
 // Error   → { "error": { "code": ConversionErrorCode, "message": string } }
 ```
 
+#### Write your own text
+
+```jsonc
+{ "text": "# My Post\n\nBody…",
+  "title": "…", "description": "…", "tags": ["a","b"],   // all optional
+  "canonicalUrl": "…", "coverImage": "…" }               // overrides inference
+
+// → { "result": ConversionResult }   platform: "text"
+```
+
 ### `POST /api/batch`
 
 ```jsonc
@@ -235,14 +444,50 @@ All endpoints are `POST`, JSON in / JSON out, zod-validated, and rate-limited pe
 ### `POST /api/publish`
 
 ```jsonc
-{ "apiKey": "DEV_API_KEY", "markdown": "---\ntitle:…\n---\n…", "articleId": 123 }  // articleId optional
+{ "apiKey": "DEV_API_KEY", "markdown": "---\ntitle:…\n---\n…",
+  "articleId": 123,        // optional — updates that article instead of creating one
+  "publishLive": true }    // optional — true publishes live, false/omitted creates a draft
 
-// → { "result": { "id", "url", "title" }, "updated": boolean }
+// → { "result": { "id", "url", "title" }, "updated": boolean,
+//     "live": boolean, "fixes": string[] }
+
+Frontmatter is repaired automatically before sending (see
+[Fix it for DEV](#4-fix-it-for-dev-one-button)); `fixes` lists what changed.
+```
+
+### `GET /api/schedule`
+
+```jsonc
+// → { "posts": [ { "id", "title", "publishAt", "publishLive", "status", "url", "error", "attempts" } ] }
+```
+
+### `POST /api/schedule`
+
+```jsonc
+{ "markdown": "---\ntitle:…\n---\n…", "publishAt": "2026-01-01T09:00:00.000Z", "publishLive": false }
+
+// → 201 { "post": { … } }
+```
+
+### `PATCH /api/schedule/:id`
+
+```jsonc
+{ "publishAt": "…", "publishLive": true,
+  "status": "draft" | "pending" | "canceled",   // pending = approve
+  "markdown": "---\ntitle:…\n---\n…" }         // all optional
+
+// → { "post": { … } }
+```
+
+### `DELETE /api/schedule/:id`
+
+```jsonc
+// → { "ok": true }
 ```
 
 **Error codes:** `INVALID_URL`, `NOT_FOUND`, `PRIVATE`, `NETWORK`, `TIMEOUT`, `INVALID_HTML`, `EXTRACT_EMPTY`, `RATE_LIMITED` — each mapped to a friendly message in the UI.
 
-**Rate limits:** convert & publish 10/min per IP; batch 3/min per IP.
+**Rate limits:** convert, publish & schedule 10/min per IP; batch 3/min per IP.
 
 ---
 
@@ -255,11 +500,20 @@ app/
   api/convert/route.ts     # Single URL / paste-HTML conversion
   api/batch/route.ts       # Up to 10 URLs, parallel
   api/publish/route.ts     # Create / update a DEV.to draft
+  api/schedule/route.ts    # List / create scheduled posts
+  api/schedule/[id]/route.ts  # Approve, edit, reschedule, cancel, delete
+  review/page.tsx          # Day-by-day review + approve screen
+  schedule/page.tsx        # Scheduled posts queue view
 components/
   convert-form.tsx         # Blog URL / Paste HTML / Batch tabs
   preview.tsx              # Split editor + live DEV preview
   toolbar.tsx              # Copy / download / revert
   publish-panel.tsx        # DEV publish UI
+  schedule-panel.tsx       # Queue a post for a future time
+  schedule-queue.tsx       # Queue list: cancel / re-queue / delete
+  review-board.tsx         # Review screen: filters, progress, post list
+  review-editor.tsx        # Read / edit / approve one post
+  nav-links.tsx            # Header nav with pending-review count
   batch-results.tsx        # Batch list: select, edit, zip, publish-all
   theme-toggle.tsx         # Dark / light toggle
   error-banner.tsx
@@ -268,16 +522,27 @@ lib/
   fetcher.ts  detect.ts  cleaner.ts  pipeline.ts  types.ts
   extractors/              # medium, hashnode, devto, wordpress, ghost, blogger, substack, generic
   markdown/                # convert (Turndown) + postprocess
-  devto/                   # frontmatter + publish
+  text/                    # written text → article (title/desc/tag inference)
+  devto/                   # frontmatter, publish, document repair
+  schedule/                # types, JSON store, publish runner, status meta
+  series/                  # series loader, types, renderer
+    <key>/                 # series content — gitignored, loaded at runtime
   utils/                   # url, html, slug, rate-limit, session-store, publish-store, cn
 scripts/
+  scheduler.ts             # worker: publishes queued posts when due
+  seed-series.ts           # seed a built-in series as drafts
   screenshots.mjs          # Playwright doc screenshots
   debug-convert.ts         # run pipeline on a saved HTML file
   debug-url.ts             # run full pipeline on a live URL
 tests/
   units.test.ts            # postprocess, converter, frontmatter, url, rate-limit, slug, embeds
+  schedule.test.ts         # published-flag, store, draft-never-publishes gate
+  series.test.ts           # series integrity; skips cleanly when no content
+  text.test.ts             # title/description/tag inference from written text
+  repair.test.ts           # frontmatter/YAML repair + heading demotion
   extractors.test.ts       # full pipeline vs. real HTML fixtures (all platforms)
   fixtures/                # captured HTML per platform
+docs/series.md             # series format + how to add your own
 docs/screenshots/          # README images
 ```
 
@@ -287,6 +552,8 @@ docs/screenshots/          # README images
 
 ```bash
 npm run dev        # dev server (http://localhost:3000)
+npm run scheduler  # publish queued posts when they come due
+npm run seed:series # seed the built-in blog series as drafts
 npm test           # Vitest — unit + extractor regression tests
 npm run lint       # ESLint
 npm run build      # production build
@@ -327,4 +594,4 @@ npm run screenshots          # writes to docs/screenshots/
 
 ## Out of scope
 
-Intentionally not built (yet): RSS feed import, and all AI features (rewriting, tag/SEO generation, cover-image generation). See [PLAN.md](PLAN.md) for the original design document.
+Intentionally not built (yet): RSS feed import, recurring/repeating schedules, and all AI features (rewriting, tag/SEO generation, cover-image generation). See [PLAN.md](PLAN.md) for the original design document.
